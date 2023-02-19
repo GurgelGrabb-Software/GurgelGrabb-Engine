@@ -15,7 +15,11 @@ set (SOURCE
 
 add_executable( 
     Application 
-    ${SOURCE} )
+    ${SOURCE})
+
+set_target_properties(Application PROPERTIES 
+    DEBUG_POSTFIX "-d" 
+    OUTPUT_NAME "GG-App" )
 
 source_group("Headers" ${H})
 source_group("Code" ${CPP})

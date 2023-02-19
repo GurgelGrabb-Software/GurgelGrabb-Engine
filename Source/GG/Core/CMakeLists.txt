@@ -17,7 +17,12 @@ add_library(
     Core STATIC 
     ${SOURCE})
 
+set_target_properties(Core PROPERTIES 
+    DEBUG_POSTFIX "-d" 
+    OUTPUT_NAME "GG-Core" )
+
 source_group("Headers" ${H})
 source_group("Code" ${CPP})
 
 target_include_directories( Core PUBLIC ${ROOTDIR}/Include )
+target_link_libraries( Core PRIVATE Rendering )
