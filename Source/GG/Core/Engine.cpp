@@ -10,9 +10,10 @@ void gg::CEngine::Run()
 {
     CWindow window;
     window.Create(800u, 800u, "Hello :D");
-    while(true)
+    while(window.IsOpen())
     {
         window.Clear();
+        window.PollEvents();
         window.Present();
     }
 }

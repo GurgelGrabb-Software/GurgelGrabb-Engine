@@ -15,6 +15,19 @@ void gg::CWindow::Clear()
     SDL_RenderClear((SDL_Renderer*)_backendRendererPtr);
 }
 
+void gg::CWindow::PollEvents()
+{
+    SDL_Event e;
+    while (SDL_PollEvent(&e)) 
+    {
+        if(e.type == SDL_QUIT)
+            _open = false;
+        {
+            break;
+        }
+    }
+}
+
 void gg::CWindow::Present()
 {
     SDL_RenderPresent((SDL_Renderer*)_backendRendererPtr);
