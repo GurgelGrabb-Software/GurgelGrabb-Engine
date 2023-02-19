@@ -8,3 +8,4 @@
 *.lib
 *.dll
 *.pdb
+*.exp
