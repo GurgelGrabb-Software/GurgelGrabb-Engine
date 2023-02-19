@@ -8,3 +8,7 @@
 *.lib
 *.dll
 *.pdb
+
+# Do not ignore third party libs or dll
+!ThirdParty/*/*.lib
+!ThirdParty/*/*.dll
