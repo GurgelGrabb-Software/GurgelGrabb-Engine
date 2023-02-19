@@ -21,4 +21,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${EXEDIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${EXEDIR})
 
 add_subdirectory(Source/GG)
+add_subdirectory(ThirdParty/SDL)
 

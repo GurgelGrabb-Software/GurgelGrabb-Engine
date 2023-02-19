@@ -3,8 +3,8 @@
 
 void gg::CWindow::Create(unsigned w, unsigned h, const char* t)
 {
-    SDL_Window* windowPtr = SDL_CreateWindow( t, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, SDL_WINDOW_SHOWN );
-    SDL_Renderer* rendererPtr = SDL_CreateRenderer(windowPtr, -1, SDL_RENDERER_ACCELERATED);
+    SDL_Window* windowPtr = SDL_CreateWindow( t, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, 0 );
+    SDL_Renderer* rendererPtr = SDL_CreateRenderer(windowPtr, "MainRenderer", SDL_RENDERER_ACCELERATED);
 
     _backendWinPtr = windowPtr;
     _backendRendererPtr = rendererPtr;
@@ -20,7 +20,7 @@ void gg::CWindow::PollEvents()
     SDL_Event e;
     while (SDL_PollEvent(&e)) 
     {
-        if(e.type == SDL_QUIT)
+        if(e.type == SDL_EVENT_QUIT)
             _open = false;
         {
             break;

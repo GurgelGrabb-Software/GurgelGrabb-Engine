@@ -13,7 +13,7 @@ namespace gg
 
     private:
         void* _backendWinPtr;
-        void* _backendRendererPtr;
+        void *_backendRendererPtr;
         bool _open = true;
     };
 }

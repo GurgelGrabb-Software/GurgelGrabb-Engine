@@ -25,9 +25,6 @@ source_group("Headers" ${H})
 source_group("Code" ${CPP})
 
 target_include_directories( Rendering PUBLIC ${ROOTDIR}/Include )
-target_include_directories( Rendering PUBLIC ${EXT_INCDIR}/SDL )
+target_include_directories( Rendering PUBLIC ${EXT_INCDIR}/SDL/include )
 
-if (WIN32)
-    target_link_libraries(Rendering debug ${EXT_LIBDIR}/SDL2-d.lib)
-    target_link_libraries(Rendering optimized ${EXT_LIBDIR}/SDL2.lib)
-endif (WIN32)
+target_link_libraries(Rendering PRIVATE SDL3::SDL3)
