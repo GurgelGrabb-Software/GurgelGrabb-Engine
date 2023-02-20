@@ -19,7 +19,8 @@ add_executable(
 
 set_target_properties(Application PROPERTIES 
     DEBUG_POSTFIX "-d" 
-    OUTPUT_NAME "GG-App" )
+    OUTPUT_NAME "GG-App"
+    CXX_STANDARD 20 )
 
 source_group("Headers" ${H})
 source_group("Code" ${CPP})

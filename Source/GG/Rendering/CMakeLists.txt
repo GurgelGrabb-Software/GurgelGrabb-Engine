@@ -19,7 +19,8 @@ add_library(
 
 set_target_properties(Core PROPERTIES 
     DEBUG_POSTFIX "-d" 
-    OUTPUT_NAME "GG-Rendering" )
+    OUTPUT_NAME "GG-Rendering"
+    CXX_STANDARD 20 )
 
 source_group("Headers" ${H})
 source_group("Code" ${CPP})
