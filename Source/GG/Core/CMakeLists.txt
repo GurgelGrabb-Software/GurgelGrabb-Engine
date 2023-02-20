@@ -5,12 +5,15 @@ set(SRCDIR ${ROOTDIR}/Source/GG/Core)
 
 set (H 
     ${INCDIR}/Engine.h
+    ${INCDIR}/Objects/Object.h
+    ${INCDIR}/Objects/Component.h
     ${INCDIR}/Service/ServiceInterface.h
     ${INCDIR}/Service/ServiceProviderInterface.h
     ${SRCDIR}/Service/ServiceProvider.h)
     
 set (CPP 
     ${SRCDIR}/Engine.cpp
+    ${SRCDIR}/Objects/Object.cpp
     ${SRCDIR}/Service/ServiceProvider.cpp )
 
 set (SOURCE
