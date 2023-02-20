@@ -4,9 +4,14 @@ set(INCDIR ${ROOTDIR}/Include/GG/Core)
 set(SRCDIR ${ROOTDIR}/Source/GG/Core)
 
 set (H 
-    ${INCDIR}/Engine.h)
+    ${INCDIR}/Engine.h
+    ${INCDIR}/Service/ServiceInterface.h
+    ${INCDIR}/Service/ServiceProviderInterface.h
+    ${SRCDIR}/Service/ServiceProvider.h)
+    
 set (CPP 
-    ${SRCDIR}/Engine.cpp)
+    ${SRCDIR}/Engine.cpp
+    ${SRCDIR}/Service/ServiceProvider.cpp )
 
 set (SOURCE
     ${H}
