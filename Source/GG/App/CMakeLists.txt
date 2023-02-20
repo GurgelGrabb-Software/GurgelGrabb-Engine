@@ -27,8 +27,3 @@ source_group("Code" ${CPP})
 
 target_include_directories(Application PUBLIC ${ROOTDIR}/Include )
 target_link_libraries( Application PRIVATE Core )
-
-if (APPLE)
-    find_package(SDL2 REQUIRED COMPONENTS SDL2)
-    target_link_libraries( Application PRIVATE SDL2::SDL2)
-endif (APPLE)
