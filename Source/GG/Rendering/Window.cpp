@@ -5,6 +5,11 @@
 
 #define WIN_PTR (GLFWwindow*)_backendWinPtr
 
+bool gg::CWindow::IsOpen() const
+{
+    return not glfwWindowShouldClose(WIN_PTR);
+}
+
 void gg::CWindow::Create(unsigned w, unsigned h, const char* t)
 {
     glfwInit();

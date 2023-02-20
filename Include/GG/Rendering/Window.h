@@ -3,7 +3,7 @@ namespace gg
     class CWindow
     {
     public:
-        bool IsOpen() { return _open; }
+        bool IsOpen() const;
 
         void Create( unsigned w, unsigned h, const char* t );
         void Destroy();
