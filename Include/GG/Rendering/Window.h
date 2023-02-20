@@ -3,10 +3,10 @@ namespace gg
     class CWindow
     {
     public:
-
         bool IsOpen() { return _open; }
 
         void Create( unsigned w, unsigned h, const char* t );
+        void Destroy();
         void Clear();
         void PollEvents();
         void Present();

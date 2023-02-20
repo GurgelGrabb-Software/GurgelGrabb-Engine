@@ -17,7 +17,7 @@ add_library(
     Rendering STATIC 
     ${SOURCE})
 
-set_target_properties(Core PROPERTIES 
+set_target_properties(Rendering PROPERTIES 
     DEBUG_POSTFIX "-d" 
     OUTPUT_NAME "GG-Rendering"
     CXX_STANDARD 20 )
@@ -25,7 +25,7 @@ set_target_properties(Core PROPERTIES
 source_group("Headers" ${H})
 source_group("Code" ${CPP})
 
-target_include_directories( Rendering PUBLIC ${ROOTDIR}/Include )
-target_include_directories( Rendering PUBLIC ${EXT_INCDIR}/SDL/include )
 
-target_link_libraries(Rendering PRIVATE SDL3::SDL3)
+target_include_directories( Rendering PUBLIC ${ROOTDIR}/Include PUBLIC ${GLAD_DIR} PUBLIC ${GLFW_DIR} )
+
+target_link_libraries(Rendering PUBLIC glfw)

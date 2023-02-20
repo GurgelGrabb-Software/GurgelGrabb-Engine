@@ -1,34 +1,41 @@
 #include "GG/Rendering/Window.h"
-#include <SDL.h>
+#define GLAD_GL_IMPLEMENTATION
+#include <glad/gl.h>
+#include <GLFW/glfw3.h>
+
+#define WIN_PTR (GLFWwindow*)_backendWinPtr
 
 void gg::CWindow::Create(unsigned w, unsigned h, const char* t)
 {
-    SDL_Window* windowPtr = SDL_CreateWindow( t, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, 0 );
-    SDL_Renderer* rendererPtr = SDL_CreateRenderer(windowPtr, "MainRenderer", SDL_RENDERER_ACCELERATED);
+    glfwInit();
+    _backendWinPtr = glfwCreateWindow( w, h, t, NULL, NULL );
+    glfwMakeContextCurrent(WIN_PTR);
 
-    _backendWinPtr = windowPtr;
-    _backendRendererPtr = rendererPtr;
+    gladLoadGL( glfwGetProcAddress );
+}
+
+void gg::CWindow::Destroy()
+{
+    glfwDestroyWindow(WIN_PTR);
 }
 
 void gg::CWindow::Clear()
 {
-    SDL_RenderClear((SDL_Renderer*)_backendRendererPtr);
+    
 }
 
 void gg::CWindow::PollEvents()
 {
-    SDL_Event e;
-    while (SDL_PollEvent(&e)) 
-    {
-        if(e.type == SDL_EVENT_QUIT)
-            _open = false;
-        {
-            break;
-        }
-    }
+    glfwPollEvents();
 }
 
 void gg::CWindow::Present()
 {
-    SDL_RenderPresent((SDL_Renderer*)_backendRendererPtr);
+    glClear(GL_COLOR_BUFFER_BIT);
+    int w, h;
+    glfwGetFramebufferSize( WIN_PTR, &w, &h );
+
+    glViewport(0, 0, w, h);
+
+    glfwSwapBuffers(WIN_PTR);
 }

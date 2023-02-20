@@ -5,8 +5,14 @@ set(ROOTDIR ${CMAKE_SOURCE_DIR})
 set(OUTDIR ${ROOTDIR}/Output)
 set(LIBDIR ${OUTDIR}/Lib)
 set(EXEDIR ${OUTDIR}/Bin)
-set(EXT_INCDIR ${ROOTDIR}/ThirdParty/Include)
 set(EXT_LIBDIR ${ROOTDIR}/ThirdParty/Lib)
+
+set( GLFW_DIR ${ROOTDIR}/ThirdParty/GLFW/include )  
+set( GLAD_DIR ${ROOTDIR}/ThirdParty/GLAD)
+
+message( "GLFW dir: ${GLFW_DIR}")
+message( "glad dir: ${GLAD_DIR}" )
+
 
 project(
     GG_Engine_Suite
@@ -21,5 +27,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${EXEDIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${EXEDIR})
 
 add_subdirectory(Source/GG)
-add_subdirectory(ThirdParty/SDL)
+add_subdirectory(ThirdParty/GLFW)
 
