@@ -4,11 +4,23 @@ set(INCDIR ${ROOTDIR}/Include/GG/Rendering)
 set(SRCDIR ${ROOTDIR}/Source/GG/Rendering)
 
 set (H 
-   ${INCDIR}/Window.h )
+   ${INCDIR}/GLInclude.h
+   
+   ${INCDIR}/Window.h
+
+   ${INCDIR}/Shader.h
+   ${INCDIR}/ShaderProgram.h
+   ${INCDIR}/VertexBuffer.h
+) 
 set (CPP 
-    ${SRCDIR}/RenderingCore.cpp
-    ${SRCDIR}/Window.cpp 
-   )
+   ${SRCDIR}/GLSetup.cpp
+
+   ${SRCDIR}/Window.cpp
+
+   ${SRCDIR}/Shader.cpp
+   ${SRCDIR}/ShaderProgram.cpp
+   ${SRCDIR}/VertexBuffer.cpp
+)
 
 set (SOURCE
     ${H}

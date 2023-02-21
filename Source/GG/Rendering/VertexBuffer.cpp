@@ -2,7 +2,7 @@
 
 #include "GG/Rendering/RenderTypes.h"
 
-#include <GLFW/glfw3.h>
+#include "GG/Rendering/GLInclude.h"
 
 using namespace gg;
 
