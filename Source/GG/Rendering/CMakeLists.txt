@@ -6,7 +6,9 @@ set(SRCDIR ${ROOTDIR}/Source/GG/Rendering)
 set (H 
    ${INCDIR}/Window.h )
 set (CPP 
-   ${SRCDIR}/Window.cpp )
+    ${SRCDIR}/RenderingCore.cpp
+    ${SRCDIR}/Window.cpp 
+   )
 
 set (SOURCE
     ${H}

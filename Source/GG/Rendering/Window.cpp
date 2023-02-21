@@ -1,9 +1,8 @@
 #include "GG/Rendering/Window.h"
-#define GLAD_GL_IMPLEMENTATION
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
-
 #define WIN_PTR (GLFWwindow*)_backendWinPtr
+
 
 bool gg::CWindow::IsOpen() const
 {
