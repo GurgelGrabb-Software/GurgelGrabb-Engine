@@ -7,6 +7,7 @@ set (H
     ${INCDIR}/Engine.h
     ${INCDIR}/Objects/Object.h
     ${INCDIR}/Objects/Component.h
+    ${INCDIR}/Utility/Logging.h
     ${INCDIR}/Service/ServiceInterface.h
     ${INCDIR}/Service/ServiceProviderInterface.h
     ${SRCDIR}/Service/ServiceProvider.h)
@@ -14,6 +15,7 @@ set (H
 set (CPP 
     ${SRCDIR}/Engine.cpp
     ${SRCDIR}/Objects/Object.cpp
+    ${SRCDIR}/Utility/Logging.cpp
     ${SRCDIR}/Service/ServiceProvider.cpp )
 
 set (SOURCE
