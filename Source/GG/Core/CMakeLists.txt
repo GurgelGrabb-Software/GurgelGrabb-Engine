@@ -10,12 +10,14 @@ set (H
     ${INCDIR}/Utility/Logging.h
     ${INCDIR}/Service/ServiceInterface.h
     ${INCDIR}/Service/ServiceProviderInterface.h
+    ${INCDIR}/Math/Mat4x4.h
     ${SRCDIR}/Service/ServiceProvider.h)
     
 set (CPP 
     ${SRCDIR}/Engine.cpp
     ${SRCDIR}/Objects/Object.cpp
     ${SRCDIR}/Utility/Logging.cpp
+    ${SRCDIR}/Math/Mat4x4.cpp
     ${SRCDIR}/Service/ServiceProvider.cpp )
 
 set (SOURCE
@@ -35,5 +37,5 @@ set_target_properties(Core PROPERTIES
 source_group("Headers" ${H})
 source_group("Code" ${CPP})
 
-target_include_directories( Core PUBLIC ${ROOTDIR}/Include )
+target_include_directories( Core PUBLIC ${ROOTDIR}/Include PUBLIC ${GLM_DIR})
 target_link_libraries( Core PRIVATE Rendering )
