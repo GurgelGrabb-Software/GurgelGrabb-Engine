@@ -3,28 +3,21 @@ cmake_minimum_required(VERSION 3.8)
 set(INCDIR ${ROOTDIR}/Include/GG/Rendering)
 set(SRCDIR ${ROOTDIR}/Source/GG/Rendering)
 
-set (H 
+set (SOURCE
    ${INCDIR}/GLInclude.h
-   
-   ${INCDIR}/Window.h
-
-   ${INCDIR}/Shader.h
-   ${INCDIR}/ShaderProgram.h
-   ${INCDIR}/VertexBuffer.h
-) 
-set (CPP 
    ${SRCDIR}/GLSetup.cpp
 
-   ${SRCDIR}/Window.cpp
-
+   ${INCDIR}/Shader.h
    ${SRCDIR}/Shader.cpp
-   ${SRCDIR}/ShaderProgram.cpp
-   ${SRCDIR}/VertexBuffer.cpp
-)
 
-set (SOURCE
-    ${H}
-    ${CPP}
+   ${INCDIR}/ShaderProgram.h
+   ${SRCDIR}/ShaderProgram.cpp
+
+   ${INCDIR}/Window.h
+   ${SRCDIR}/Window.cpp
+   
+   ${INCDIR}/VertexBuffer.h
+   ${SRCDIR}/VertexBuffer.cpp
 )
 
 add_library( 
@@ -35,10 +28,6 @@ set_target_properties(Rendering PROPERTIES
     DEBUG_POSTFIX "-d" 
     OUTPUT_NAME "GG-Rendering"
     CXX_STANDARD 20 )
-
-source_group("Headers" ${H})
-source_group("Code" ${CPP})
-
 
 target_include_directories( Rendering PUBLIC ${ROOTDIR}/Include PUBLIC ${GLAD_DIR} PUBLIC ${GLFW_DIR} )
 
