@@ -8,15 +8,16 @@ namespace gg
 	{
     public:
         CMat4x4();
+        CMat4x4( const Mat4x4_Back& backend );
 
         CMat4x4 GetTransposed() const;
         CMat4x4 GetInverse() const;
 
         CMat4x4 operator*(const CMat4x4& rhs) const;
         CMat4x4& operator*=(const CMat4x4& rhs);
-
-        Mat4x4_Back& GetBackendMatrix();
-        const Mat4x4_Back& GetBackendMatrix() const;
+        
+        // Allow static cast to the backend type
+        explicit operator Mat4x4_Back();
 
 	private:
         Mat4x4_Back _matrix;
