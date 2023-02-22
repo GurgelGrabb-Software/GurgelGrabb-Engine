@@ -13,6 +13,8 @@ set (SOURCE
 
     ${INCDIR}/Math/Mat4x4.h
     ${SRCDIR}/Math/Mat4x4.cpp
+    ${INCDIR}/Math/Vec3.h
+    ${SRCDIR}/Math/Vec3.cpp
     
     ${INCDIR}/Utility/Logging.h
     ${SRCDIR}/Utility/Logging.cpp
