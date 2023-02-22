@@ -9,9 +9,11 @@ set(EXT_LIBDIR ${ROOTDIR}/ThirdParty/Lib)
 
 set( GLFW_DIR ${ROOTDIR}/ThirdParty/GLFW/include )  
 set( GLAD_DIR ${ROOTDIR}/ThirdParty/GLAD)
+set( GLM_DIR ${ROOTDIR}/ThirdParty/GLMath)
 
 message( "GLFW dir: ${GLFW_DIR}")
 message( "glad dir: ${GLAD_DIR}" )
+message( "GLM dir: ${GLM_DIR}" )
 
 
 project(
