@@ -23,3 +23,9 @@ void CShaderProgram::Bind()
 {
     glUseProgram(_handle);
 }
+
+void CShaderProgram::SetUniform(const char* uniform, const gg::CMat4x4& matrix)
+{
+    int location = glGetUniformLocation(_handle, uniform);
+    glUniformMatrix4fv(location, 1, false, matrix.GetData());
+}

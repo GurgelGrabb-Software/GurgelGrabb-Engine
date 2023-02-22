@@ -2,14 +2,26 @@
 
 namespace gg
 {
-    struct SVertex
+    struct SFloat2
+    {
+        float x, y;
+    };
+
+    struct SFloat3
     {
         float x, y, z;
     };
 
-    struct SColor
+    struct SFloat4
     {
-        float r, g, b, a;
+        float x, y, z, w;
+    };
+
+    struct SVertex
+    {
+        SFloat3 position;
+        SFloat4 color;
+        //SFloat2 uv;
     };
 
     enum class EShaderType

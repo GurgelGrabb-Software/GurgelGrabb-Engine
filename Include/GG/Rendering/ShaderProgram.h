@@ -1,5 +1,7 @@
 #pragma once
 
+#include "GG/Core/Math/Mat4x4.h"
+
 namespace gg
 {
     class CShader;
@@ -13,6 +15,8 @@ namespace gg
         unsigned GetHandle() const { return _handle; };
 
         void Bind();
+
+        void SetUniform(const char* uniform, const gg::CMat4x4& matrix);
 
         private:
 

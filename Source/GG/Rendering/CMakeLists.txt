@@ -29,6 +29,6 @@ set_target_properties(Rendering PROPERTIES
     OUTPUT_NAME "GG-Rendering"
     CXX_STANDARD 20 )
 
-target_include_directories( Rendering PUBLIC ${ROOTDIR}/Include PUBLIC ${GLAD_DIR} PUBLIC ${GLFW_DIR} )
+target_include_directories( Rendering PUBLIC ${ROOTDIR}/Include PUBLIC ${GLAD_DIR} PUBLIC ${GLFW_DIR} PUBLIC ${GLM_DIR} )
 
 target_link_libraries(Rendering PUBLIC glfw)

@@ -4,6 +4,9 @@
 
 #define WIN_PTR (GLFWwindow*)_backendWinPtr
 
+#include <glm/mat4x4.hpp>
+#include <glm/matrix.hpp>
+#include <glm/vec3.hpp>
 bool gg::CWindow::IsOpen() const
 {
     return not glfwWindowShouldClose(WIN_PTR);
@@ -35,6 +38,8 @@ void gg::CWindow::PollEvents()
 
 void gg::CWindow::Present()
 {
+    glm::ortho();
+
     glClear(GL_COLOR_BUFFER_BIT);
     int w, h;
     glfwGetFramebufferSize( WIN_PTR, &w, &h );

@@ -38,6 +38,11 @@ gg::CMat4x4& gg::CMat4x4::operator*=( const CMat4x4& rhs )
 	return *this;
 }
 
+const float* gg::CMat4x4::GetData() const
+{
+	return &_matrix[0][0];
+}
+
 gg::CMat4x4::operator gg::Mat4x4_Back()
 {
     return _matrix;

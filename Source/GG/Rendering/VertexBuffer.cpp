@@ -11,9 +11,9 @@ CVertexBuffer::CVertexBuffer()
     glGenBuffers(1, &_handle);
 
     SVertex v[3] = {
-        {.x=0.0f, .y=0.0f},
-        {.x=0.5f, .y=1.0f},
-        {.x=1.0f, .y=0.0f},
+        {.position={.x=0.0f, .y=0.0f}},
+        {.position={.x=0.5f, .y=1.0f}},
+        {.position={.x=1.0f, .y=0.0f}},
     };
 
     Bind();

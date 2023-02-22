@@ -16,6 +16,8 @@ namespace gg
         CMat4x4 operator*(const CMat4x4& rhs) const;
         CMat4x4& operator*=(const CMat4x4& rhs);
         
+        const float* GetData() const;
+
         // Allow static cast to the backend type
         explicit operator Mat4x4_Back();
 
