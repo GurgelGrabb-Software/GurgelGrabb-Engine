@@ -5,37 +5,97 @@
 #include "GG/Rendering/GLInclude.h"
 
 #include <cmath>
+#include <cassert>
 
 using namespace gg;
 
-CVertexBuffer::CVertexBuffer()
+unsigned convertToGLType(EVertexAccessMode mode)
 {
-    glGenVertexArrays(1, &_vao);
-    glBindVertexArray(_vao);
+    switch (mode)
+    {
+    case EVertexAccessMode::Static:
+        return GL_STATIC_DRAW;
+        break;
+    case EVertexAccessMode::Dynamic:
+        return GL_DYNAMIC_DRAW;
+    default:
+        return GL_STATIC_DRAW;
+        break;
+    }
+}
 
-    glGenBuffers(1, &_vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+CVertexBuffer::CVertexBuffer(EVertexFormat format, EVertexAccessMode accessMode) : 
+_format(format),
+_accessMode(accessMode)
+{
+    glGenVertexArrays(1, &_handle);
+    glBindVertexArray(_handle);
 
-    const float PI2 = 3.14159f * 2.f;
-    const float s = 0.5f;
-    SVertex v[3] = {
-        {.position={.x = s*std::cosf(PI2 * 2.f/3.f), .y=s*std::sinf(PI2 * 2.f/3.f)}},
-        {.position={.x = s*std::cosf(0.f),           .y=s*std::sinf(0.f)}},
-        {.position={.x = s*std::cosf(PI2 * 1.f/3.f), .y=s*std::sinf(PI2 * 1.f/3.f)}},
-    };
+    if (HasFlag(format, EAttributeType::Position))
+    {
+        addAttribute(EAttributeType::Position, {});
+    }
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(SVertex) * 3, v, GL_STATIC_DRAW);
+    if (HasFlag(format, EAttributeType::Color))
+    {
+        addAttribute(EAttributeType::Color, {});
+    }
 
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(SVertex), (void*)0);
+    if (HasFlag(format, EAttributeType::UV))
+    {
+        addAttribute(EAttributeType::UV, {});
+    }
 }
 
 CVertexBuffer::~CVertexBuffer()
 {
-    glDeleteBuffers(1, &_vao);
+    glDeleteBuffers(1, &_handle);
 }
 
 void CVertexBuffer::Bind() const
 {
-    glBindVertexArray(_vao);
+    glBindVertexArray(_handle);
+}
+
+const std::vector<float>& CVertexBuffer::GetAttributeData(EAttributeType type) const
+{
+    auto it = _attributeHandles.find(type);
+    assert(it != _attributeHandles.end());
+
+    return it->second.data;
+}
+
+void CVertexBuffer::SetAttributeData(EAttributeType type, const std::vector<float>& data)
+{
+    auto it = _attributeHandles.find(type);
+    assert(it != _attributeHandles.end());
+
+    it->second.data = data;
+
+    Bind();
+
+    glBindBuffer(GL_ARRAY_BUFFER, it->second.handle);
+    glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(float), data.data(), convertToGLType(_accessMode));
+
+    glEnableVertexAttribArray(it->second.index);
+    glVertexAttribPointer(it->second.index, (sizeof(float) * data.size()) / GetSize(type), GL_FLOAT, false, GetSize(type), (void*)0);
+}
+
+void CVertexBuffer::addAttribute(EAttributeType type, const std::vector<float>& data)
+{
+    auto index = _attributeHandles.size();
+
+    auto& attrHandle = _attributeHandles[type];
+    attrHandle.index = index;
+    glGenBuffers(1, &attrHandle.handle);
+
+    if (!data.empty())
+    {
+        SetAttributeData(type, data);
+    }
+}
+
+bool CVertexBuffer::hasAttribute(EAttributeType type)
+{
+    return _attributeHandles.find(type) != _attributeHandles.end();
 }

@@ -18,7 +18,7 @@ namespace gg
 
         void Bind() const;
 
-        void SetUniform(const char* uniform, const gg::CMat4x4& matrix);
+        void SetUniform(const char* uniform, const gg::CMat4x4& v);
         void SetUniform(const char* uniform, const SFloat4& v);
         void SetUniform(const char* uniform, const SFloat3& v);
         void SetUniform(const char* uniform, const SFloat2& v);

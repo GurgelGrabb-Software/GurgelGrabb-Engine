@@ -34,10 +34,10 @@ void CShaderProgram::Bind() const
     glUseProgram(_handle);
 }
 
-void CShaderProgram::SetUniform(const char* uniform, const gg::CMat4x4& matrix)
+void CShaderProgram::SetUniform(const char* uniform, const gg::CMat4x4& v)
 {
     int location = glGetUniformLocation(_handle, uniform);
-    glUniformMatrix4fv(location, 1, false, matrix.GetData());
+    glUniformMatrix4fv(location, 1, false, v.GetData());
 }
 
 void CShaderProgram::SetUniform(const char* uniform, const gg::SFloat4& v)
