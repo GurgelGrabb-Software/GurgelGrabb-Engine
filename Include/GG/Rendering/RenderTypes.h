@@ -20,7 +20,7 @@ namespace gg
     struct SVertex
     {
         SFloat3 position;
-        SFloat4 color;
+        //SFloat4 color;
         //SFloat2 uv;
     };
 

@@ -4,6 +4,8 @@
 
 #include "GG/Rendering/GLInclude.h"
 
+#include <iostream>
+
 using namespace gg;
 
 CShaderProgram::CShaderProgram(const CShader& vertexShader, const CShader& pixelShader)
@@ -12,6 +14,14 @@ CShaderProgram::CShaderProgram(const CShader& vertexShader, const CShader& pixel
     glAttachShader(_handle, vertexShader.GetHandle());
     glAttachShader(_handle, pixelShader.GetHandle());
     glLinkProgram(_handle);
+
+    int result;
+    glGetProgramiv(_handle, GL_LINK_STATUS, &result);
+    if(!result) {
+        char log[512];
+        glGetProgramInfoLog(_handle, 512, NULL, log);
+        std::cout << "ShaderProgram: " << log << std::endl;
+    }
 }
 
 CShaderProgram::~CShaderProgram()
@@ -19,7 +29,7 @@ CShaderProgram::~CShaderProgram()
     glDeleteProgram(_handle);
 }
 
-void CShaderProgram::Bind()
+void CShaderProgram::Bind() const
 {
     glUseProgram(_handle);
 }

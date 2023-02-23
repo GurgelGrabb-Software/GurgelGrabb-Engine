@@ -8,11 +8,12 @@ namespace gg
             CVertexBuffer();
             ~CVertexBuffer();
 
-            unsigned GetHandle() const { return _handle; };
+            unsigned GetHandle() const { return _vao; };
 
-            void Bind();
+            void Bind() const;
         private:
 
-        unsigned _handle;
+        unsigned _vao;
+        unsigned _vbo;
     };
 }

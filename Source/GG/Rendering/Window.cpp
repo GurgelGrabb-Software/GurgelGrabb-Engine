@@ -4,9 +4,14 @@
 
 #define WIN_PTR (GLFWwindow*)_backendWinPtr
 
-#include <glm/mat4x4.hpp>
-#include <glm/matrix.hpp>
-#include <glm/vec3.hpp>
+#include "GG/Rendering/VertexBuffer.h"
+#include "GG/Rendering/ShaderProgram.h"
+#include "GG/Rendering/Shader.h"
+
+#include <glm/gtc/matrix_transform.hpp>
+
+#include <iostream>
+
 bool gg::CWindow::IsOpen() const
 {
     return not glfwWindowShouldClose(WIN_PTR);
@@ -15,6 +20,14 @@ bool gg::CWindow::IsOpen() const
 void gg::CWindow::Create(unsigned w, unsigned h, const char* t)
 {
     glfwInit();
+
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#ifdef __APPLE__
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
+
     _backendWinPtr = glfwCreateWindow( w, h, t, NULL, NULL );
     glfwMakeContextCurrent(WIN_PTR);
 
@@ -28,7 +41,7 @@ void gg::CWindow::Destroy()
 
 void gg::CWindow::Clear()
 {
-    
+    glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void gg::CWindow::PollEvents()
@@ -38,13 +51,24 @@ void gg::CWindow::PollEvents()
 
 void gg::CWindow::Present()
 {
-    glm::ortho();
-
-    glClear(GL_COLOR_BUFFER_BIT);
-    int w, h;
-    glfwGetFramebufferSize( WIN_PTR, &w, &h );
-
-    glViewport(0, 0, w, h);
-
     glfwSwapBuffers(WIN_PTR);
+}
+
+glm::i32vec2 gg::CWindow::GetSize() const
+{
+    glm::i32vec2 size;
+    glfwGetWindowSize( WIN_PTR, &size.x, &size.y );
+    return size;
+}
+
+void gg::CWindow::SetViewport(int x, int y, int w, int h)
+{
+    glViewport(x, y, w, h);
+}
+
+void gg::CWindow::Draw(const gg::CVertexBuffer& vertexBuffer, const CShaderProgram& program)
+{
+    program.Bind();
+    vertexBuffer.Bind();
+    glDrawArrays(GL_TRIANGLES, 0, 3);
 }
