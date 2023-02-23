@@ -39,3 +39,27 @@ void CShaderProgram::SetUniform(const char* uniform, const gg::CMat4x4& matrix)
     int location = glGetUniformLocation(_handle, uniform);
     glUniformMatrix4fv(location, 1, false, matrix.GetData());
 }
+
+void CShaderProgram::SetUniform(const char* uniform, const gg::SFloat4& v)
+{
+    int location = glGetUniformLocation(_handle, uniform);
+    glUniform4fv(location, 1, &v.x);
+}
+
+void CShaderProgram::SetUniform(const char* uniform, const gg::SFloat3& v)
+{
+    int location = glGetUniformLocation(_handle, uniform);
+    glUniform3fv(location, 1, &v.x);
+}
+
+void CShaderProgram::SetUniform(const char* uniform, const gg::SFloat2& v)
+{
+    int location = glGetUniformLocation(_handle, uniform);
+    glUniform2fv(location, 1, &v.x);
+}
+
+void CShaderProgram::SetUniform(const char* uniform, float v)
+{
+    int location = glGetUniformLocation(_handle, uniform);
+    glUniform1fv(location, 1, &v);
+}

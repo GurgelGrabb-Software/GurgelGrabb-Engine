@@ -2,6 +2,8 @@
 
 #include "GG/Core/Math/Mat4x4.h"
 
+#include "GG/Rendering/RenderTypes.h"
+
 namespace gg
 {
     class CShader;
@@ -17,6 +19,10 @@ namespace gg
         void Bind() const;
 
         void SetUniform(const char* uniform, const gg::CMat4x4& matrix);
+        void SetUniform(const char* uniform, const SFloat4& v);
+        void SetUniform(const char* uniform, const SFloat3& v);
+        void SetUniform(const char* uniform, const SFloat2& v);
+        void SetUniform(const char* uniform, float v);
 
         private:
 
