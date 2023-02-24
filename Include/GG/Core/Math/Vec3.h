@@ -1,3 +1,5 @@
+#pragma once
+
 #include <glm/Vec3.hpp>
 
 namespace gg
@@ -13,6 +15,7 @@ namespace gg
 
 
 		explicit operator Vec3_Back();
+		explicit operator Vec3_Back() const;
 
 	private:
 		Vec3_Back _vec3;

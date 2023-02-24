@@ -1,6 +1,7 @@
 #include "GG/Core/Math/Mat4x4.h"
 
-#include <glm/vec3.hpp>
+#include <glm/Vec3.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #define IDENTITY_R1 1, 0, 0, 0
 #define IDENTITY_R2 0, 1, 0, 0
@@ -35,6 +36,47 @@ gg::CMat4x4 gg::CMat4x4::operator*( const CMat4x4& rhs ) const
 gg::CMat4x4& gg::CMat4x4::operator*=( const CMat4x4& rhs )
 {
 	_matrix *= rhs._matrix;
+	return *this;
+}
+
+gg::CMat4x4& gg::CMat4x4::SetIdentity()
+{
+	_matrix = glm::identity<glm::mat4x4>();
+	return *this;
+}
+
+gg::CMat4x4& gg::CMat4x4::Translate(const gg::CVec3& translation)
+{
+	_matrix = glm::translate(_matrix, static_cast<glm::vec3>(translation));
+	return *this;
+}
+
+gg::CMat4x4& gg::CMat4x4::Rotate(float angle, const gg::CVec3& axis)
+{
+	_matrix = glm::rotate(_matrix, angle, static_cast<glm::vec3>(axis));
+	return *this;
+}
+
+gg::CMat4x4& gg::CMat4x4::Scale(const gg::CVec3& scale)
+{
+	_matrix = glm::scale(_matrix, static_cast<glm::vec3>(scale));
+	return *this;
+}
+
+gg::CMat4x4 gg::CMat4x4::operator*(const CMat4x4& other)
+{
+	return _matrix * other._matrix;
+}
+
+gg::CMat4x4& gg::CMat4x4::SetOrthographic(float left, float right, float top, float bottom, float near, float far)
+{
+	_matrix = glm::ortho(left, right, bottom, top, near, far);
+	return *this;
+
+}
+gg::CMat4x4& gg::CMat4x4::SetPerspective(float fovY, float aspect, float near, float far)
+{
+	_matrix = glm::perspective(fovY, aspect, near, far);
 	return *this;
 }
 

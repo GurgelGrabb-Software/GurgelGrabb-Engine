@@ -1,4 +1,7 @@
+#pragma once
+
 #include <glm/mat4x4.hpp>
+#include <GG/Core/Math/Vec3.h>
 
 namespace gg
 {
@@ -15,6 +18,16 @@ namespace gg
 
         CMat4x4 operator*(const CMat4x4& rhs) const;
         CMat4x4& operator*=(const CMat4x4& rhs);
+
+        CMat4x4& SetIdentity();
+        CMat4x4& Translate(const CVec3& translation);
+        CMat4x4& Rotate(float angle, const CVec3& axis);
+        CMat4x4& Scale(const CVec3& scale);
+
+        CMat4x4 operator*(const CMat4x4& other);
+
+        CMat4x4& SetOrthographic(float left, float right, float top, float bottom, float near=-1.f, float far = 1.f);
+        CMat4x4& SetPerspective(float fovY, float aspect, float near, float far);
         
         const float* GetData() const;
 
