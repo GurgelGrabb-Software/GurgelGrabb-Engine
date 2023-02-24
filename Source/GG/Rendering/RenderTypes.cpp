@@ -1,5 +1,6 @@
 #include "GG/Rendering/RenderTypes.h"
 
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
 using namespace gg;
