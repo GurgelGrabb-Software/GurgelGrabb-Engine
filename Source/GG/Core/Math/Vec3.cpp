@@ -28,3 +28,8 @@ gg::CVec3::operator gg::Vec3_Back()
 {
     return _vec3;
 }
+
+gg::CVec3::operator gg::Vec3_Back() const
+{
+    return _vec3;
+}
