@@ -30,7 +30,7 @@ namespace gg
 		// MUTATORS
 		T& Add( const T& cpy );
 		void Remove( TSize i );
-		void Resize( TSize s );
+		void Reserve( TSize s );
 
 		// GETTERS
 		TSize Size() const;
@@ -146,7 +146,7 @@ namespace gg
 		, _reserved( 0 )
 		, _size( 0 )
 	{
-		Resize( reserve );
+		Reserve( reserve );
 	}
 
 	LIST_T LIST::TList( const TList< T, TSize >& other )
@@ -199,7 +199,7 @@ namespace gg
 	{
 		if ( _size == _reserved )
 		{
-			Resize( _reserved * 2 );
+			Reserve( _reserved * 2 );
 		}
 
 		_elems[_size] = cpy;
@@ -213,7 +213,7 @@ namespace gg
 		_size--;
 	}
 
-	LIST_T void LIST::Resize( TSize s )
+	LIST_T void LIST::Reserve( TSize s )
 	{
 		T* newBuf = new T[s];
 		BufferCopy< T >( _elems, newBuf, (unsigned int)_size );
