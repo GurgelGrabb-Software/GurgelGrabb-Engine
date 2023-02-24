@@ -59,7 +59,7 @@ std::shared_ptr<CVertexBuffer> GraphicsUtilities::CreateCircle(float diameter, i
 	auto buffer = std::make_shared<CVertexBuffer>(format);
 	buffer->SetPrimitiveType(EPrimitiveType::TriangleFan);
 	const float r = 0.5f * diameter;
-	SFloat3 v[resolution+1];
+	SFloat3* v = new SFloat3[resolution+1];
 	float angle = 0.f;
 	for (int i = 0; i < resolution+1; ++i)
 	{
@@ -70,6 +70,8 @@ std::shared_ptr<CVertexBuffer> GraphicsUtilities::CreateCircle(float diameter, i
 	std::vector<float> buf(GetNumOfElements(EAttributeType::Position) * (resolution+1));
 	memcpy(buf.data(), v, buf.size() * sizeof(float));
 	buffer->SetAttributeData(EAttributeType::Position, buf);
+
+	delete[] v;
 
 	return buffer;
 }
