@@ -9,21 +9,6 @@
 
 using namespace gg;
 
-unsigned convertToGLType(EVertexAccessMode mode)
-{
-    switch (mode)
-    {
-    case EVertexAccessMode::Static:
-        return GL_STATIC_DRAW;
-        break;
-    case EVertexAccessMode::Dynamic:
-        return GL_DYNAMIC_DRAW;
-    default:
-        return GL_STATIC_DRAW;
-        break;
-    }
-}
-
 CVertexBuffer::CVertexBuffer(EVertexFormat format, EVertexAccessMode accessMode) : 
 _format(format),
 _accessMode(accessMode)
@@ -68,17 +53,23 @@ const std::vector<float>& CVertexBuffer::GetAttributeData(EAttributeType type) c
 void CVertexBuffer::SetAttributeData(EAttributeType type, const std::vector<float>& data)
 {
     auto it = _attributeHandles.find(type);
-    assert(it != _attributeHandles.end());
+    if (it == _attributeHandles.end())
+    {
+        assert(false && "Attribute does not exist.");
+        return;
+    }
 
     it->second.data = data;
+
+    _vertexCount = data.size() / GetNumOfElements(type);
 
     Bind();
 
     glBindBuffer(GL_ARRAY_BUFFER, it->second.handle);
-    glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(float), data.data(), convertToGLType(_accessMode));
+    glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(float), data.data(), ConvertToGLType(_accessMode));
 
     glEnableVertexAttribArray(it->second.index);
-    glVertexAttribPointer(it->second.index, (sizeof(float) * data.size()) / GetSize(type), GL_FLOAT, false, GetSize(type), (void*)0);
+    glVertexAttribPointer(it->second.index, GetNumOfElements(type), GL_FLOAT, false, GetByteSize(type), (void*)0);
 }
 
 void CVertexBuffer::addAttribute(EAttributeType type, const std::vector<float>& data)
@@ -98,4 +89,22 @@ void CVertexBuffer::addAttribute(EAttributeType type, const std::vector<float>& 
 bool CVertexBuffer::hasAttribute(EAttributeType type)
 {
     return _attributeHandles.find(type) != _attributeHandles.end();
+}
+
+bool CVertexBuffer::ValidateAttributes() const
+{
+    for (auto& attrHandle : _attributeHandles)
+    {
+        if (attrHandle.second.data.size() / GetNumOfElements(attrHandle.first) == _vertexCount)
+        {
+            assert(false && "Attributes are not synced!");
+            return false;
+        }
+    }
+    return true;
+}
+
+void CVertexBuffer::SetPrimitiveType(EPrimitiveType primitiveType)
+{
+    _primitiveType = primitiveType;
 }

@@ -7,6 +7,12 @@ set (SOURCE
    ${INCDIR}/GLInclude.h
    ${SRCDIR}/GLSetup.cpp
 
+   ${INCDIR}/RenderTypes.h
+   ${SRCDIR}/RenderTypes.cpp
+
+   ${INCDIR}/ShaderParser.h
+   ${SRCDIR}/ShaderParser.cpp
+
    ${INCDIR}/Shader.h
    ${SRCDIR}/Shader.cpp
 
@@ -18,6 +24,9 @@ set (SOURCE
    
    ${INCDIR}/VertexBuffer.h
    ${SRCDIR}/VertexBuffer.cpp
+
+   ${INCDIR}/GraphicsUtilities.h
+   ${SRCDIR}/GraphicsUtilities.cpp
 )
 
 add_library( 

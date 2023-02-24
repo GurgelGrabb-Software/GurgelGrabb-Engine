@@ -7,6 +7,7 @@
 #include "GG/Rendering/VertexBuffer.h"
 #include "GG/Rendering/ShaderProgram.h"
 #include "GG/Rendering/Shader.h"
+#include "GG/Rendering/RenderTypes.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -70,5 +71,5 @@ void gg::CWindow::Draw(const gg::CVertexBuffer& vertexBuffer, const CShaderProgr
 {
     program.Bind();
     vertexBuffer.Bind();
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(ConvertToGLType(vertexBuffer.GetPrimitiveType()), 0, vertexBuffer.GetVertexCount());
 }

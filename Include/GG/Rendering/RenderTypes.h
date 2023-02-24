@@ -21,7 +21,17 @@ namespace gg
     {
         Vertex,
         Pixel,
-        Count,
+        None,
+    };
+
+    enum class EPrimitiveType
+    {
+        Triangles,
+        TriangleFan,
+        TriangleStrip,
+
+        Lines,
+        LineStrip,
     };
 
     enum class EVertexAccessMode
@@ -45,18 +55,27 @@ namespace gg
         P3UV2   = Position | UV,
     };
 
-    inline constexpr unsigned GetSize(EAttributeType type) 
+    inline constexpr unsigned GetNumOfElements(EAttributeType type) 
     {
         switch (type)
         {
-            case EAttributeType::Position: return sizeof(SFloat3); break;
-            case EAttributeType::Color: return sizeof(SFloat4); break;
+            case EAttributeType::Position: return sizeof(SFloat3) / sizeof(float); break;
+            case EAttributeType::Color: return sizeof(SFloat4) / sizeof(float); break;
             default: return 0; break;
         }
+    }
+
+    inline constexpr unsigned GetByteSize(EAttributeType type)
+    {
+        return GetNumOfElements(type) * sizeof(float);
     }
 
     inline constexpr bool HasFlag(int flags, int flag)
     {
         return (flags & flag) != 0;
     }
+
+    unsigned ConvertToGLType(EVertexAccessMode mode);
+    unsigned ConvertToGLType(EPrimitiveType type);
+    unsigned ConvertToGLType(EShaderType type);
 }
