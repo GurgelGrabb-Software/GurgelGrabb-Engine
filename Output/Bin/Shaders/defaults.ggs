@@ -1,0 +1,47 @@
+#BEGIN_VERTEXSHADER P3C4_Vertex
+
+#version 330 core
+
+/* Vertex Attributes */
+
+layout (location = 0) in vec3 aPosition;
+layout (location = 1) in vec4 aVertexColor;
+
+/* Uniforms */
+
+uniform mat4 mvp;
+
+/* Output */
+
+out vec4 vColor;
+
+void main()
+{
+    vColor = aVertexColor;
+    gl_Position = mvp * vec4(aPosition.xyz, 1.0);
+}
+
+#END_VERTEXSHADER
+
+#BEGIN_PIXELSHADER P3C4_Pixel
+
+#version 330 core
+
+/* Vertex Input */
+
+in vec4 vColor;
+
+/* Uniforms */
+
+uniform vec4 color;
+
+/* Output */
+
+out vec4 FragColor;
+
+void main()
+{
+   FragColor = color * vColor;
+}
+
+#END_PIXELSHADER
