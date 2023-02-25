@@ -55,6 +55,14 @@ namespace gg
         P3UV2   = Position | UV,
     };
 
+    enum class ETextureFormat
+    {
+        R,
+        RG,
+        RGB,
+        RGBA
+    };
+
     inline constexpr unsigned GetNumOfElements(EAttributeType type) 
     {
         switch (type)
