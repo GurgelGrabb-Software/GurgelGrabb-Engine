@@ -19,8 +19,6 @@ macro(LOG_MSG msg)
     message("> ${msg}")
 endmacro()
 
-
-
 message( "=== GG CMAKE START ===" )
 
 set(OS_COMPILE_DEF Unknown)
