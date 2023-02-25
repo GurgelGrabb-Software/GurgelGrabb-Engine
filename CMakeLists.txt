@@ -1,13 +1,12 @@
 cmake_minimum_required(VERSION 3.8)
 
-
-
 option(BUILD_TESTS "Tests will be built with this config")
 
 if(BUILD_TESTS)
     enable_testing()
 endif()
 
+# SET GLOBAL VARIABLES
 set(GG_VER 0.0.1)
 set(ROOTDIR ${CMAKE_SOURCE_DIR})
 set(OUTDIR ${ROOTDIR}/Output)
@@ -15,6 +14,7 @@ set(LIBDIR ${OUTDIR}/Lib)
 set(EXEDIR ${OUTDIR}/Bin)
 set(EXT_LIBDIR ${ROOTDIR}/ThirdParty/Lib)
 
+# DEFINE MACROS/FUNCTIONS FOR NEATER LOGGING
 macro(PRINT_VAR v)
     message("> ${v} ${${v}}")
 endmacro()
@@ -29,6 +29,7 @@ endmacro()
 
 message( "=== GG CMAKE START ===" )
 
+# SET COMPILE DEFINITIONS FOR APPLE/WIN32
 set(OS_COMPILE_DEF Unknown)
 if(APPLE)
 set(OS_COMPILE_DEF APPLE)
