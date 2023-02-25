@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
 
-set(INCDIR ${ROOTDIR}/Include/GG/Core)
-set(SRCDIR ${ROOTDIR}/Source/GG/Core)
-
 set (SOURCE
     ${INCDIR}/Engine.h
     ${SRCDIR}/Engine.cpp
@@ -26,13 +23,13 @@ set (SOURCE
 )
 
 add_library( 
-    Core STATIC 
+    ${PROJECT} STATIC 
     ${SOURCE})
 
-set_target_properties(Core PROPERTIES 
+set_target_properties(${PROJECT} PROPERTIES 
     DEBUG_POSTFIX "-d" 
     OUTPUT_NAME "GG-Core"
     CXX_STANDARD 20 )
 
-target_include_directories( Core PUBLIC ${ROOTDIR}/Include PUBLIC ${GLM_DIR})
-target_link_libraries( Core PRIVATE Rendering )
+target_include_directories( ${PROJECT} PUBLIC ${ROOTDIR}/Include PUBLIC ${GLM_DIR})
+target_link_libraries( ${PROJECT} PRIVATE Rendering )

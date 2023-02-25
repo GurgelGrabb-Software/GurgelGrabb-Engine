@@ -2,7 +2,7 @@
 // Sequential container like std::vector
 
 #pragma once
-#include "GG/GGTL/MemUtil.h"
+#include "GG/Common/MemUtil.h"
 
 #include <initializer_list>
 #include <type_traits>

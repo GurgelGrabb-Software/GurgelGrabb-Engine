@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
 
-set(INCDIR ${ROOTDIR}/Include/GG/Rendering)
-set(SRCDIR ${ROOTDIR}/Source/GG/Rendering)
-
 set (SOURCE
    ${INCDIR}/GLInclude.h
    ${SRCDIR}/GLSetup.cpp
@@ -30,14 +27,14 @@ set (SOURCE
 )
 
 add_library( 
-    Rendering STATIC 
+    ${PROJECT} STATIC 
     ${SOURCE})
 
-set_target_properties(Rendering PROPERTIES 
+set_target_properties(${PROJECT} PROPERTIES 
     DEBUG_POSTFIX "-d" 
     OUTPUT_NAME "GG-Rendering"
     CXX_STANDARD 20 )
 
-target_include_directories( Rendering PUBLIC ${ROOTDIR}/Include PUBLIC ${GLAD_DIR} PUBLIC ${GLFW_DIR} PUBLIC ${GLM_DIR} )
+target_include_directories( ${PROJECT} PUBLIC ${ROOTDIR}/Include PUBLIC ${GLAD_DIR} PUBLIC ${GLFW_DIR} PUBLIC ${GLM_DIR} )
 
-target_link_libraries(Rendering PUBLIC glfw)
+target_link_libraries(${PROJECT} PUBLIC glfw)
