@@ -33,6 +33,9 @@ void gg::CWindow::Create(unsigned w, unsigned h, const char* t)
     glfwMakeContextCurrent(WIN_PTR);
 
     gladLoadGL( glfwGetProcAddress );
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void gg::CWindow::Destroy()
@@ -53,6 +56,17 @@ void gg::CWindow::PollEvents()
 void gg::CWindow::Present()
 {
     glfwSwapBuffers(WIN_PTR);
+
+#ifdef APPLE // Hack for MacOS: nothing gets drawn until window has been altered once.
+    static bool firstTime = true;
+    if (firstTime)
+    {
+        firstTime = false;
+        int x, y;
+        glfwGetWindowPos(WIN_PTR, &x, &y);
+        //glfwSetWindowPos(WIN_PTR, x+1, y+1);
+    }
+#endif
 }
 
 glm::i32vec2 gg::CWindow::GetSize() const
