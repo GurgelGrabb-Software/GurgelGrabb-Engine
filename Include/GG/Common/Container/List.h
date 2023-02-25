@@ -141,7 +141,7 @@ namespace gg
 	}
 
 	LIST_T LIST::TList( TSize reserve )
-		: TList()
+		: _elems( nullptr )
 		, _reserved( 0 )
 		, _size( 0 )
 	{
@@ -215,8 +215,11 @@ namespace gg
 	LIST_T void LIST::Reserve( TSize s )
 	{
 		T* newBuf = new T[s];
-		BufferCopy< T >( _elems, newBuf, (unsigned int)_size );
-		delete[] _elems;
+		if(_elems)
+		{
+			BufferCopy< T >( _elems, newBuf, (unsigned int)_size );
+			delete[] _elems;
+		}
 
 		_reserved = s;
 		_elems = newBuf;
