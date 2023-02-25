@@ -33,6 +33,9 @@ void gg::CWindow::Create(unsigned w, unsigned h, const char* t)
     glfwMakeContextCurrent(WIN_PTR);
 
     gladLoadGL( glfwGetProcAddress );
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void gg::CWindow::Destroy()
