@@ -53,6 +53,17 @@ void gg::CWindow::PollEvents()
 void gg::CWindow::Present()
 {
     glfwSwapBuffers(WIN_PTR);
+
+#ifdef APPLE // Hack for MacOS: nothing gets drawn until window has been altered once.
+    static bool firstTime = true;
+    if (firstTime)
+    {
+        firstTime = false;
+        int x, y;
+        glfwGetWindowPos(WIN_PTR, &x, &y);
+        //glfwSetWindowPos(WIN_PTR, x+1, y+1);
+    }
+#endif
 }
 
 glm::i32vec2 gg::CWindow::GetSize() const
