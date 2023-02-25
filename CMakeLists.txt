@@ -1,5 +1,13 @@
 cmake_minimum_required(VERSION 3.8)
 
+
+
+option(BUILD_TESTS "Tests will be built with this config")
+
+if(BUILD_TESTS)
+    enable_testing()
+endif()
+
 set(GG_VER 0.0.1)
 set(ROOTDIR ${CMAKE_SOURCE_DIR})
 set(OUTDIR ${ROOTDIR}/Output)
@@ -60,5 +68,11 @@ add_subdirectory(Source/GG)
 
 LOG_START("ADD THIRD PARTY DIRECTORIES")
 add_subdirectory(ThirdParty/GLFW)
+
+if(BUILD_TESTS)
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    add_subdirectory(ThirdParty/googletest)
+    add_subdirectory(Test)
+endif()
 
 message( "=== GG CMAKE END ===" )
