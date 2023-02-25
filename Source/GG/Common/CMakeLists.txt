@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.8)
 
 set (SOURCE
-    ${INCDIR}/List.h
-    ${INCDIR}/MemUtil.h
+    ${INCDIR}/Container/List.h
+    ${INCDIR}/Helpers/MemUtil.h
 )
 
 add_library( 
-    ${PROJECT} INTERFACE 
+    ${PROJECT} INTERFACE
     ${SOURCE})
 
 set_target_properties(${PROJECT} PROPERTIES 
