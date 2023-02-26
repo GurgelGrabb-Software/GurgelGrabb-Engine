@@ -19,8 +19,12 @@ set (SOURCE
     ${SRCDIR}/Utility/Timer.cpp
     ${INCDIR}/Utility/StringID.h
     ${SRCDIR}/Utility/StringID.cpp
-    ${INCDIR}/Utility/ThreadPool.h
-    ${SRCDIR}/Utility/ThreadPool.cpp
+    
+    ${INCDIR}/Threading/WorkFunction.h
+    ${INCDIR}/Threading/ThreadPool.h
+    ${SRCDIR}/Threading/ThreadPool.cpp
+    ${INCDIR}/Threading/ThreadObject.h
+    ${SRCDIR}/Threading/ThreadObject.cpp
     
     ${INCDIR}/Service/ServiceProviderInterface.h
     ${INCDIR}/Service/ServiceInterface.h
