@@ -119,14 +119,3 @@ const std::string& CShaderParser::GetShaderSource(const std::string& name) const
         return std::string();
     }
 }
-
-const CShaderParser::ShaderID& CShaderParser::FindCompatibleShader(EVertexFormat format) const
-{
-    for (const auto& shader : shaders)
-    {
-        if (shader.second.second == format)
-        {
-            return shader.first;
-        }
-    }
-}

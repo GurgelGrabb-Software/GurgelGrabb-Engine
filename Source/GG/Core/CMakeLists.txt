@@ -17,6 +17,8 @@ set (SOURCE
     ${SRCDIR}/Utility/Logging.cpp
     ${INCDIR}/Utility/Timer.h
     ${SRCDIR}/Utility/Timer.cpp
+    ${INCDIR}/Utility/StringID.h
+    ${SRCDIR}/Utility/StringID.cpp
     
     ${INCDIR}/Service/ServiceProviderInterface.h
     ${INCDIR}/Service/ServiceInterface.h
