@@ -16,19 +16,19 @@ _accessMode(accessMode)
     glGenVertexArrays(1, &_handle);
     glBindVertexArray(_handle);
 
-    if (HasFlag(format, EAttributeType::Position))
+    if (HasFlag(format, EVertexAttributeType::Position))
     {
-        addAttribute(EAttributeType::Position, {});
+        addAttribute(EVertexAttributeType::Position, {});
     }
 
-    if (HasFlag(format, EAttributeType::Color))
+    if (HasFlag(format, EVertexAttributeType::Color))
     {
-        addAttribute(EAttributeType::Color, {});
+        addAttribute(EVertexAttributeType::Color, {});
     }
 
-    if (HasFlag(format, EAttributeType::UV))
+    if (HasFlag(format, EVertexAttributeType::UV))
     {
-        addAttribute(EAttributeType::UV, {});
+        addAttribute(EVertexAttributeType::UV, {});
     }
 }
 
@@ -42,7 +42,7 @@ void CVertexBuffer::Bind() const
     glBindVertexArray(_handle);
 }
 
-const std::vector<float>& CVertexBuffer::GetAttributeData(EAttributeType type) const
+const std::vector<float>& CVertexBuffer::GetAttributeData(EVertexAttributeType type) const
 {
     auto it = _attributeHandles.find(type);
     assert(it != _attributeHandles.end());
@@ -50,7 +50,7 @@ const std::vector<float>& CVertexBuffer::GetAttributeData(EAttributeType type) c
     return it->second.data;
 }
 
-void CVertexBuffer::SetAttributeData(EAttributeType type, const std::vector<float>& data)
+void CVertexBuffer::SetAttributeData(EVertexAttributeType type, const std::vector<float>& data)
 {
     auto it = _attributeHandles.find(type);
     if (it == _attributeHandles.end())
@@ -72,7 +72,7 @@ void CVertexBuffer::SetAttributeData(EAttributeType type, const std::vector<floa
     glVertexAttribPointer(it->second.index, GetNumOfElements(type), GL_FLOAT, false, GetByteSize(type), (void*)0);
 }
 
-void CVertexBuffer::addAttribute(EAttributeType type, const std::vector<float>& data)
+void CVertexBuffer::addAttribute(EVertexAttributeType type, const std::vector<float>& data)
 {
     auto index = _attributeHandles.size();
 
@@ -86,7 +86,7 @@ void CVertexBuffer::addAttribute(EAttributeType type, const std::vector<float>& 
     }
 }
 
-bool CVertexBuffer::hasAttribute(EAttributeType type)
+bool CVertexBuffer::hasAttribute(EVertexAttributeType type)
 {
     return _attributeHandles.find(type) != _attributeHandles.end();
 }

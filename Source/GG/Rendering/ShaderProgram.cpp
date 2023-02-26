@@ -1,6 +1,7 @@
 #include "GG/Rendering/ShaderProgram.h"
 
 #include "GG/Rendering/Shader.h"
+#include "GG/Rendering/Texture.h"
 
 #include "GG/Rendering/GLInclude.h"
 
@@ -32,6 +33,15 @@ CShaderProgram::~CShaderProgram()
 void CShaderProgram::Bind() const
 {
     glUseProgram(_handle);
+}
+
+void CShaderProgram::SetUniform(const char* uniform, const CTexture& v, unsigned unit)
+{
+    glActiveTexture(GL_TEXTURE0 + unit);
+    v.Bind();
+
+    int location = glGetUniformLocation(_handle, uniform);
+    glUniform1i(location, unit);
 }
 
 void CShaderProgram::SetUniform(const char* uniform, const gg::CMat4x4& v)

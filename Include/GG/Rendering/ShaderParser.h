@@ -14,6 +14,8 @@ namespace gg
     {
     public:
 
+        using ShaderID = std::string;
+
         CShaderParser();
         ~CShaderParser();
 
@@ -24,6 +26,6 @@ namespace gg
         const std::string& GetShaderSource(const std::string& name) const;
 
     private:
-        std::unordered_map<std::string, std::string> shaders;
+        std::unordered_map<ShaderID, std::pair<std::string, EVertexFormat>> shaders;
     };
 }

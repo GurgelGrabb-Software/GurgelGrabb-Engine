@@ -45,3 +45,107 @@ void main()
 }
 
 #END_PIXELSHADER
+
+#BEGIN_VERTEXSHADER P3UV2_Vertex
+
+#version 330 core
+
+/* Vertex Attributes */
+
+layout (location = 0) in vec3 aPosition;
+layout (location = 1) in vec2 aUV;
+
+/* Uniforms */
+
+uniform mat4 mvp;
+
+/* Output */
+
+out vec2 vUV;
+
+void main()
+{
+    vUV = aUV;
+    gl_Position = mvp * vec4(aPosition.xyz, 1.0);
+}
+
+#END_VERTEXSHADER
+
+#BEGIN_PIXELSHADER P3UV2_Pixel
+
+#version 330 core
+
+/* Vertex Input */
+
+in vec2 vUV;
+
+/* Uniforms */
+
+uniform vec4 color;
+uniform sampler2D tex;
+
+/* Output */
+
+out vec4 FragColor;
+
+void main()
+{
+    vec4 tex_color = texture(tex, vUV).rgba;
+    FragColor = tex_color * color;
+}
+
+#END_PIXELSHADER
+
+#BEGIN_VERTEXSHADER P3C4UV2_Vertex
+
+#version 330 core
+
+/* Vertex Attributes */
+
+layout (location = 0) in vec3 aPosition;
+layout (location = 1) in vec4 aVertexColor;
+layout (location = 2) in vec2 aUV;
+
+/* Uniforms */
+
+uniform mat4 mvp;
+
+/* Output */
+
+out vec4 vColor;
+out vec2 vUV;
+
+void main()
+{
+    vColor = aVertexColor;
+    vUV = aUV;
+    gl_Position = mvp * vec4(aPosition.xyz, 1.0);
+}
+
+#END_VERTEXSHADER
+
+#BEGIN_PIXELSHADER P3C4UV2_Pixel
+
+#version 330 core
+
+/* Vertex Input */
+
+in vec4 vColor;
+in vec2 vUV;
+
+/* Uniforms */
+
+uniform vec4 color;
+uniform sampler2D tex;
+
+/* Output */
+
+out vec4 FragColor;
+
+void main()
+{
+    vec4 tex_color = texture(tex, vUV).rgba;
+    FragColor = tex_color * color * vColor;
+}
+
+#END_PIXELSHADER

@@ -7,6 +7,7 @@
 namespace gg
 {
     class CShader;
+    class CTexture;
 
     class CShaderProgram
     {
@@ -18,6 +19,7 @@ namespace gg
 
         void Bind() const;
 
+        void SetUniform(const char* uniform, const CTexture& v, unsigned unit = 0);
         void SetUniform(const char* uniform, const gg::CMat4x4& v);
         void SetUniform(const char* uniform, const SFloat4& v);
         void SetUniform(const char* uniform, const SFloat3& v);

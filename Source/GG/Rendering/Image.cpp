@@ -11,7 +11,7 @@ std::shared_ptr<CImage> CImage::LoadFromFile(const std::filesystem::path& filepa
 {
     int w, h, ch;
     
-    const PixelData data = (PixelData)stbi_load(filepath.string().c_str(), &w, &h, &ch, 0);
+    PixelData data = (PixelData)stbi_load(filepath.string().c_str(), &w, &h, &ch, 0);
 
     auto image = std::make_shared<CImage>(w, h, static_cast<ETextureFormat>(ch-1), data);
 
@@ -24,12 +24,15 @@ void CImage::SaveToFile(CImage& image, const std::filesystem::path& filepath)
     stbi_write_png(filepath.string().c_str(), image._width, image._height, channels, image._pixels, image._width * channels);
 }
 
-CImage::CImage(unsigned width, unsigned height, ETextureFormat format, const PixelData data) : 
+CImage::CImage(unsigned width, unsigned height, ETextureFormat format, PixelData data) : 
 _width(width),
 _height(height),
-_format(format)
+_format(format),
+_pixels(data)
 {
-    int channels = static_cast<int>(_format) + 1;
-    _pixels = new unsigned char[width * height * channels];
-    memcpy(_pixels, data, width * height * channels);
+}
+
+CImage::~CImage()
+{
+    delete[] _pixels;
 }
