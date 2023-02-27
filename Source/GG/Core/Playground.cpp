@@ -6,6 +6,8 @@
 #include "GG/Rendering/ShaderProgram.h"
 #include "GG/Rendering/VertexBuffer.h"
 #include "GG/Rendering/RenderTarget.h"
+#include "GG/Rendering/Texture.h"
+#include "GG/Rendering/Image.h"
 
 #include "GG/Core/Objects/Transform.h"
 #include "GG/Core/Utility/Timer.h"
@@ -16,18 +18,19 @@ static std::shared_ptr<CVertexBuffer> vb;
 static std::shared_ptr<CShaderProgram> sp;
 static CTransform mat;
 static CTimer timer;
+static std::shared_ptr<CTexture> tex;
 
 CPlayground::CPlayground() {
-    vb = GraphicsUtilities::CreateRectangleColor(0.5f, 0.5f, {1,0,0,1});
+    vb = GraphicsUtilities::CreateRectangleUV(0.5f, 0.5f);
 
     CShaderParser parser;
     parser.ParseFromFile("Shaders/defaults.ggs");
 
     sp = std::make_shared<CShaderProgram>(
-        CShader(parser.GetShaderSource("P3C4_Vertex").c_str(), EShaderType::Vertex),
-        CShader(parser.GetShaderSource("P3C4_Pixel").c_str(), EShaderType::Pixel));
+        CShader(parser.GetShaderSource("P3UV2_Vertex").c_str(), EShaderType::Vertex),
+        CShader(parser.GetShaderSource("P3UV2_Pixel").c_str(), EShaderType::Pixel));
 
-    
+    tex = std::make_shared<CTexture>(*CImage::LoadFromFile("Textures/JGobSanta.png"));
 
  }
 
@@ -50,6 +53,7 @@ void CPlayground::Draw(IRenderTarget& target)
 
     sp->SetUniform("mvp", m);
     sp->SetUniform("color", {1,1,1,1});
+    sp->SetUniform("tex", *tex);
 
     target.Draw(*vb, *sp);
 }
