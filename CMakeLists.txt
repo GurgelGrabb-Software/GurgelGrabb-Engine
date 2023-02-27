@@ -1,9 +1,15 @@
 cmake_minimum_required(VERSION 3.8)
 
+
+option(GG_BUILD_VERBOSE "Build with high verbosity")
 option(BUILD_TESTS "Tests will be built with this config")
 
 if(BUILD_TESTS)
     enable_testing()
+endif()
+
+if(GG_BUILD_VERBOSE)
+    set(CMAKE_VERBOSE_MAKEFILE ON)
 endif()
 
 # SET GLOBAL VARIABLES
@@ -52,6 +58,10 @@ PRINT_VAR(GLFW_DIR)
 PRINT_VAR(GLAD_DIR)
 PRINT_VAR(GLM_DIR)
 PRINT_VAR(FMT_DIR)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 LOG_START("CREATE PROJECT")
 LOG_MSG("Version ${GG_VER}")
