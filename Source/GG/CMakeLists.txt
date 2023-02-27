@@ -20,6 +20,7 @@ endfunction()
 
 
 GG_PROJ( Common ${GG_INC}/Common ${GG_SRC}/Common )
+GG_PROJ( EntitySystem ${GG_INC}/EntitySystem ${GG_SRC}/EntitySystem )
 GG_PROJ( App ${GG_INC}/App ${GG_SRC}/App )
 GG_PROJ( Core ${GG_INC}/Core ${GG_SRC}/Core )
 GG_PROJ( Rendering ${GG_INC}/Rendering ${GG_SRC}/Rendering ) 
