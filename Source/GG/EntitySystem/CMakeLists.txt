@@ -16,4 +16,6 @@ set_target_properties(${PROJECT} PROPERTIES
     OUTPUT_NAME "GG-EntitySystem"
     CXX_STANDARD 20 )
 
+target_compile_features(${PROJECT} PUBLIC cxx_std_20)
+
 target_include_directories( ${PROJECT} PUBLIC ${ROOTDIR}/Include )

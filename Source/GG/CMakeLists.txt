@@ -16,6 +16,7 @@ function( GG_PROJ N IncDir SrcDir )
     message("\n")
     add_subdirectory(${N})
     
+    
 endfunction()
 
 
