@@ -8,6 +8,7 @@
 #include "GG/Rendering/RenderTarget.h"
 #include "GG/Rendering/Texture.h"
 #include "GG/Rendering/Image.h"
+#include "GG/Core/EntitySystem/Entity.h"
 
 #include "GG/Core/Objects/Transform.h"
 #include "GG/Core/Utility/Timer.h"
@@ -19,9 +20,13 @@ static std::shared_ptr<CShaderProgram> sp;
 static CTransform mat;
 static CTimer timer;
 static std::shared_ptr<CTexture> tex;
+static CEntity* entity;
+
 
 CPlayground::CPlayground() {
     vb = GraphicsUtilities::CreateRectangleUV(0.5f, 0.5f);
+
+    entity = CEntity::Instantiate();
 
     CShaderParser parser;
     parser.ParseFromFile("Shaders/defaults.ggs");
@@ -38,13 +43,13 @@ void CPlayground::Update()
 { 
     float dt = timer.Reset();
 
-    mat.SetScale({0.75f + 0.25f * std::cosf(timer.GetTotalTime()), 0.75f + 0.25f * std::sinf(timer.GetTotalTime()), 1});
-    mat.SetPosition({0.5f * std::cosf(timer.GetTotalTime()), 0.5f * std::sinf(timer.GetTotalTime()), 0});
+    entity->GetTransform().SetScale({0.75f + 0.25f * std::cosf(timer.GetTotalTime()), 0.75f + 0.25f * std::sinf(timer.GetTotalTime()), 1});
+    entity->GetTransform().SetPosition({0.5f * std::cosf(timer.GetTotalTime()), 0.5f * std::sinf(timer.GetTotalTime()), 0});
 }
 
 void CPlayground::Draw(IRenderTarget& target)
 {
-    CMat4x4 m = mat.GetMatrix();
+    CMat4x4 m = entity->GetTransform().GetMatrix();
     CMat4x4 p;
 
     p.SetOrthographic(-1, 1, -1, 1);

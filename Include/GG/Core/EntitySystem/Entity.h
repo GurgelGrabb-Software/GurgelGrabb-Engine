@@ -1,5 +1,6 @@
 #pragma once
 #include "GG/Core/EntitySystem/Component.h"
+#include "GG/Core/Objects/Transform.h"
 
 #include <cassert>
 #include <map>
@@ -58,6 +59,8 @@ namespace gg
 			return _componentsMap[cid];
 		}
 
+		CTransform& GetTransform();
+		const CTransform& GetTransform() const;
 	private:
 		CEntity();
 
@@ -70,6 +73,7 @@ namespace gg
 			return typeid( TComponent ).hash_code();
 		}
 
+		CTransform _transform;
 		std::map< CompTypeID, CComponent* > _componentsMap;
 	};
 } // namespace gg
