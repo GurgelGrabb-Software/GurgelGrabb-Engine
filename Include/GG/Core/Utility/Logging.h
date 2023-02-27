@@ -5,16 +5,16 @@
 
 #include <string_view>
 #include <string>
-#include <format>
+#include <fmt/core.h>
 
 namespace gg
 {
     namespace log_internal
     {
         template< typename ... TArgs >
-        std::string BuildLogMsg( std::string_view fmt, TArgs&&... args )
+        std::string BuildLogMsg( fmt::string_view fmt, TArgs&&... args )
         {
-            return std::vformat( fmt, std::make_format_args(args...) );
+            return fmt::vformat( fmt, fmt::make_format_args(args...) );
         }
     }
 

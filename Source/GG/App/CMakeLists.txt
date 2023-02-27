@@ -14,5 +14,5 @@ set_target_properties(${PROJECT} PROPERTIES
     OUTPUT_NAME "GG-App"
     CXX_STANDARD 20 )
 
-target_include_directories(${PROJECT} PUBLIC ${ROOTDIR}/Include PUBLIC ${GLM_DIR} )
+target_include_directories(${PROJECT} PUBLIC ${ROOTDIR}/Include PUBLIC ${GLM_DIR} PUBLIC ${FMT_DIR} )
 target_link_libraries( ${PROJECT} PRIVATE Core )

@@ -41,6 +41,6 @@ set_target_properties(${PROJECT} PROPERTIES
     OUTPUT_NAME "GG-Rendering"
     CXX_STANDARD 20 )
 
-target_include_directories( ${PROJECT} PUBLIC ${ROOTDIR}/Include PUBLIC ${GLAD_DIR} PUBLIC ${GLFW_DIR} PUBLIC ${GLM_DIR} PUBLIC ${STB_DIR} )
+target_include_directories( ${PROJECT} PUBLIC ${ROOTDIR}/Include PUBLIC ${GLAD_DIR} PUBLIC ${GLFW_DIR} PUBLIC ${GLM_DIR} PUBLIC ${STB_DIR} PUBLIC ${FMT_DIR} )
 
 target_link_libraries(${PROJECT} PUBLIC glfw)
