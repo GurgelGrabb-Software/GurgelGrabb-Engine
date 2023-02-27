@@ -16,10 +16,13 @@ namespace gg
         static std::shared_ptr<CImage> LoadFromFile(const std::filesystem::path& filepath);
         static void SaveToFile(CImage& image, const std::filesystem::path& filepath);
 
-        CImage(unsigned width, unsigned height, ETextureFormat format, const PixelData data = nullptr);
+        CImage(unsigned width, unsigned height, ETextureFormat format, PixelData data = nullptr);
+        ~CImage();
 
         unsigned GetWidth() const { return _width; };
         unsigned GetHeight() const { return _height; };
+        ETextureFormat GetFormat() const { return _format; };
+        const PixelData GetData() const { return _pixels; };
 
     private:
 

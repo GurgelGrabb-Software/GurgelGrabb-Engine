@@ -40,7 +40,7 @@ namespace gg
         Dynamic,
     };
 
-    enum EAttributeType
+    enum EVertexAttributeType
     {
         Position    = 0x100000,
         Color       = 0x010000,
@@ -63,17 +63,24 @@ namespace gg
         RGBA
     };
 
-    inline constexpr unsigned GetNumOfElements(EAttributeType type) 
+    enum class ESamplerMode
+    {
+        Linear,
+        Nearest,
+    };
+
+    inline constexpr unsigned GetNumOfElements(EVertexAttributeType type) 
     {
         switch (type)
         {
-            case EAttributeType::Position: return sizeof(SFloat3) / sizeof(float); break;
-            case EAttributeType::Color: return sizeof(SFloat4) / sizeof(float); break;
+            case EVertexAttributeType::Position: return sizeof(SFloat3) / sizeof(float); break;
+            case EVertexAttributeType::Color: return sizeof(SFloat4) / sizeof(float); break;
+            case EVertexAttributeType::UV: return sizeof(SFloat2) / sizeof(float); break;
             default: return 0; break;
         }
     }
 
-    inline constexpr unsigned GetByteSize(EAttributeType type)
+    inline constexpr unsigned GetByteSize(EVertexAttributeType type)
     {
         return GetNumOfElements(type) * sizeof(float);
     }
@@ -86,4 +93,6 @@ namespace gg
     unsigned ConvertToGLType(EVertexAccessMode mode);
     unsigned ConvertToGLType(EPrimitiveType type);
     unsigned ConvertToGLType(EShaderType type);
+    unsigned ConvertToGLType(ETextureFormat format);
+    unsigned ConvertToGLType(ESamplerMode mode);
 }

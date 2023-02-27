@@ -21,16 +21,16 @@ namespace gg
 
         void Bind() const;
 
-        const std::vector<float>& GetAttributeData(EAttributeType type) const;
-        void SetAttributeData(EAttributeType type, const std::vector<float>& data);
+        const std::vector<float>& GetAttributeData(EVertexAttributeType type) const;
+        void SetAttributeData(EVertexAttributeType type, const std::vector<float>& data);
         bool ValidateAttributes() const;
 
         void SetPrimitiveType(EPrimitiveType primitiveType);
 
     private:
 
-        bool hasAttribute(EAttributeType type);
-        void addAttribute(EAttributeType type, const std::vector<float>& data);
+        bool hasAttribute(EVertexAttributeType type);
+        void addAttribute(EVertexAttributeType type, const std::vector<float>& data);
 
         unsigned _handle;
         size_t _vertexCount;
@@ -43,6 +43,6 @@ namespace gg
             unsigned index;
             std::vector<float> data;
         };
-        std::unordered_map<EAttributeType, SAttributeHandle> _attributeHandles;
+        std::unordered_map<EVertexAttributeType, SAttributeHandle> _attributeHandles;
     };
 }

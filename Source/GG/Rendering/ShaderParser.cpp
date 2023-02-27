@@ -6,6 +6,27 @@
 
 using namespace gg;
 
+EVertexFormat parseFormat(const std::string& name)
+{
+    int format = 0;
+    auto pos = name.find("P3");
+    if (pos != std::string::npos)
+    {
+        format |= EVertexFormat::P3;
+    }
+    pos = name.find("C4");
+    if (pos != std::string::npos)
+    {
+        format |= EVertexAttributeType::Color;
+    }
+    pos = name.find("UV2");
+    if (pos != std::string::npos)
+    {
+        format |= EVertexAttributeType::UV;
+    }
+    return static_cast<EVertexFormat>(format);
+}
+
 CShaderParser::CShaderParser()
 {
 
@@ -66,7 +87,9 @@ void CShaderParser::ParseFromStream(std::stringstream& source)
             {
                 assert(currentType != EShaderType::None);
 
-                shaders[currentName] = currentShader;
+                auto format = parseFormat(currentName);
+
+                shaders[currentName] = std::make_pair(currentShader, format);
 
                 auto type = currentType == EShaderType::Vertex ? "Vertex" : "Pixel";
                 std::cout << "ShaderParser: Found " << type << "Shader with name: " << currentName << std::endl;
@@ -88,7 +111,7 @@ const std::string& CShaderParser::GetShaderSource(const std::string& name) const
     auto shaderIt = shaders.find(name);
     if (shaderIt != shaders.end())
     {
-        return shaderIt->second;
+        return shaderIt->second.first;
     }
     else
     {

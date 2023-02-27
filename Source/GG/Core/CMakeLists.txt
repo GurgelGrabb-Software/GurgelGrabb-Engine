@@ -13,6 +13,23 @@ set (SOURCE
     ${SRCDIR}/Utility/Logging.cpp
     ${INCDIR}/Utility/Timer.h
     ${SRCDIR}/Utility/Timer.cpp
+    ${INCDIR}/Utility/StringID.h
+    ${SRCDIR}/Utility/StringID.cpp
+    
+    ${INCDIR}/Threading/WorkFunction.h
+    ${INCDIR}/Threading/ThreadPool.h
+    ${SRCDIR}/Threading/ThreadPool.cpp
+    ${INCDIR}/Threading/ThreadObject.h
+    ${SRCDIR}/Threading/ThreadObject.cpp
+    
+    ${INCDIR}/Messaging/BaseMessage.h
+    ${INCDIR}/Messaging/MessageSubscriberList.h
+    ${INCDIR}/Messaging/MessageQueue.h
+    ${SRCDIR}/Messaging/MessageQueue.cpp
+    ${INCDIR}/Messaging/SubscriptionHandle.h
+    ${SRCDIR}/Messaging/SubscriptionHandle.cpp
+    ${INCDIR}/Messaging/Subscriptions.h
+    ${SRCDIR}/Messaging/Subscriptions.cpp
     
     ${INCDIR}/Service/ServiceProviderInterface.h
     ${INCDIR}/Service/ServiceInterface.h

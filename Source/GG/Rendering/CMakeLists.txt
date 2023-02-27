@@ -27,6 +27,9 @@ set (SOURCE
 
    ${INCDIR}/Image.h
    ${SRCDIR}/Image.cpp
+
+   ${INCDIR}/Texture.h
+   ${SRCDIR}/Texture.cpp
 )
 
 add_library( 

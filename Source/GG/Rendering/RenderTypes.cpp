@@ -59,3 +59,41 @@ unsigned gg::ConvertToGLType(EShaderType type)
         break;
     }
 }
+
+unsigned gg::ConvertToGLType(ETextureFormat format)
+{
+    switch (format)
+    {
+    case ETextureFormat::R:
+        return GL_R32I;
+        break;
+    case ETextureFormat::RG:
+        return GL_RG;
+        break;
+    case ETextureFormat::RGB:
+        return GL_RGB;
+        break;
+    case ETextureFormat::RGBA:
+        return GL_RGBA;
+        break;
+    default:
+        return GL_RGBA;
+        break;
+    }
+}
+
+unsigned gg::ConvertToGLType(ESamplerMode mode)
+{
+    switch (mode)
+    {
+    case ESamplerMode::Linear:
+        return GL_LINEAR;
+        break;
+    case ESamplerMode::Nearest:
+        return GL_NEAREST;
+        break;
+    default:
+        return GL_LINEAR;
+        break;
+    }
+}

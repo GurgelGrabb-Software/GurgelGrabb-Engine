@@ -23,9 +23,9 @@ std::shared_ptr<CVertexBuffer> GraphicsUtilities::CreateTriangle(float size, EVe
 		{.x = 0.f, .y = -hs},
 		{.x = hs, .y = hs},
 	};
-	std::vector<float> buf(GetNumOfElements(EAttributeType::Position) * 3);
+	std::vector<float> buf(GetNumOfElements(EVertexAttributeType::Position) * 3);
 	memcpy(buf.data(), v, buf.size() * sizeof(float));
-	buffer->SetAttributeData(EAttributeType::Position, buf);
+	buffer->SetAttributeData(EVertexAttributeType::Position, buf);
 
     return buffer;
 }
@@ -47,9 +47,9 @@ std::shared_ptr<CVertexBuffer> GraphicsUtilities::CreateRectangle(float width, f
 		tl, tr, bl,
 		bl, tr, br
 	};
-	std::vector<float> buf(GetNumOfElements(EAttributeType::Position) * 6);
+	std::vector<float> buf(GetNumOfElements(EVertexAttributeType::Position) * 6);
 	memcpy(buf.data(), v, buf.size() * sizeof(float));
-	buffer->SetAttributeData(EAttributeType::Position, buf);
+	buffer->SetAttributeData(EVertexAttributeType::Position, buf);
 
 	return buffer;
 }
@@ -67,19 +67,56 @@ std::shared_ptr<CVertexBuffer> GraphicsUtilities::CreateCircle(float diameter, i
 		angle += 2.f * 3.14159f / resolution;
 	}
 
-	std::vector<float> buf(GetNumOfElements(EAttributeType::Position) * (resolution+1));
+	std::vector<float> buf(GetNumOfElements(EVertexAttributeType::Position) * (resolution+1));
 	memcpy(buf.data(), v, buf.size() * sizeof(float));
-	buffer->SetAttributeData(EAttributeType::Position, buf);
+	buffer->SetAttributeData(EVertexAttributeType::Position, buf);
 
 	delete[] v;
 
 	return buffer;
 }
 
-std::shared_ptr<CVertexBuffer> GraphicsUtilities::CreateRectangle(float width, float height, const SFloat4& color)
+std::shared_ptr<CVertexBuffer> GraphicsUtilities::CreateRectangleColor(float width, float height, const SFloat4& color)
 {
 	auto buffer = CreateRectangle(width, height, EVertexFormat::P3C4);
-	SetVertexAttributes<SFloat4>(*buffer, EAttributeType::Color, color);
+	SetVertexAttributes<SFloat4>(*buffer, EVertexAttributeType::Color, color);
+
+	return buffer;
+}
+
+std::shared_ptr<CVertexBuffer> GraphicsUtilities::CreateRectangleUV(float width, float height)
+{
+	auto buffer = CreateRectangle(width, height, EVertexFormat::P3UV2);
+	SFloat2 tl{.x = 0, .y = 0};
+	SFloat2 tr{.x = 1, .y = 0};
+	SFloat2 br{.x = 1, .y = 1};
+	SFloat2 bl{.x = 0, .y = 1};
+	SFloat2 v[6] = {
+		tl, tr, bl,
+		bl, tr, br
+	};
+	std::vector<float> buf(GetNumOfElements(EVertexAttributeType::Position) * 6);
+	memcpy(buf.data(), v, buf.size() * sizeof(float));
+	buffer->SetAttributeData(EVertexAttributeType::UV, buf);
+
+	return buffer;
+}
+
+std::shared_ptr<CVertexBuffer> GraphicsUtilities::CreateRectangleColorUV(float width, float height, const SFloat4& color)
+{
+	auto buffer = CreateRectangle(width, height, EVertexFormat::P3C4UV2);
+	SetVertexAttributes<SFloat4>(*buffer, EVertexAttributeType::Color, color);
+	SFloat2 tl{.x = 0, .y = 0};
+	SFloat2 tr{.x = 1, .y = 0};
+	SFloat2 br{.x = 1, .y = 1};
+	SFloat2 bl{.x = 0, .y = 1};
+	SFloat2 v[6] = {
+		tl, tr, bl,
+		bl, tr, br
+	};
+	std::vector<float> buf(GetNumOfElements(EVertexAttributeType::Position) * 6);
+	memcpy(buf.data(), v, buf.size() * sizeof(float));
+	buffer->SetAttributeData(EVertexAttributeType::UV, buf);
 
 	return buffer;
 }
@@ -87,7 +124,7 @@ std::shared_ptr<CVertexBuffer> GraphicsUtilities::CreateRectangle(float width, f
 std::shared_ptr<CVertexBuffer> GraphicsUtilities::CreateTriangle(float size, const SFloat4& color)
 {
 	auto buffer = CreateTriangle(size, EVertexFormat::P3C4);
-	SetVertexAttributes<SFloat4>(*buffer, EAttributeType::Color, color);
+	SetVertexAttributes<SFloat4>(*buffer, EVertexAttributeType::Color, color);
 
 	return buffer;
 }
@@ -95,7 +132,7 @@ std::shared_ptr<CVertexBuffer> GraphicsUtilities::CreateTriangle(float size, con
 std::shared_ptr<CVertexBuffer> GraphicsUtilities::CreateCircle(float size, const SFloat4& color, int resolution)
 {
 	auto buffer = CreateCircle(size, resolution, EVertexFormat::P3C4);
-	SetVertexAttributes<SFloat4>(*buffer, EAttributeType::Color, color);
+	SetVertexAttributes<SFloat4>(*buffer, EVertexAttributeType::Color, color);
 
 	return buffer;
 }
