@@ -13,17 +13,17 @@ namespace gg
 		CVec3( float x, float y, float z );
 		CVec3( const CVec3& o );
 
+		void operator=( const CVec3& o );
 
 		explicit operator Vec3_Back();
 		explicit operator Vec3_Back() const;
 
 	private:
 		Vec3_Back _vec3;
-        
-    public:
-    	float& X;
+
+	public:
+		float& X;
 		float& Y;
 		float& Z;
-
 	};
 } // namespace gg

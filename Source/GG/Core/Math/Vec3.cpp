@@ -16,20 +16,25 @@ gg::CVec3::CVec3( float x, float y, float z )
 {
 }
 
-gg::CVec3::CVec3(const CVec3& o)
-    : _vec3(o._vec3)
-    , X( _vec3.x )
+gg::CVec3::CVec3( const CVec3& o )
+	: _vec3( o._vec3 )
+	, X( _vec3.x )
 	, Y( _vec3.y )
 	, Z( _vec3.z )
 {
 }
 
+void gg::CVec3::operator=( const CVec3& o )
+{
+	_vec3 = o._vec3;
+}
+
 gg::CVec3::operator gg::Vec3_Back()
 {
-    return _vec3;
+	return _vec3;
 }
 
 gg::CVec3::operator gg::Vec3_Back() const
 {
-    return _vec3;
+	return _vec3;
 }
