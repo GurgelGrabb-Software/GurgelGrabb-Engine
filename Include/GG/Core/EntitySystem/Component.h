@@ -1,6 +1,4 @@
 #pragma once
-#include "GG/EntitySystem/Interfaces/EntityOwnedInterface.h"
-
 #include <string>
 
 namespace gg

@@ -1,10 +1,10 @@
 #pragma once
+#include "GG/Core/EntitySystem/Component.h"
+
 #include <cassert>
 #include <map>
 #include <typeinfo>
 #include <utility>
-#include "GG/EntitySystem/Base/Component.h"
-
 
 namespace gg
 {
@@ -30,8 +30,8 @@ namespace gg
 			const auto cid = GetCompID< TComponent >();
 			assert( !_componentsMap.contains( cid ) );
 
-			_componentsMap[cid] = CComponent::Instantiate<TComponent, TArgs...>( *this, args... );
-			return *static_cast<TComponent*>(_componentsMap[cid]);
+			_componentsMap[cid] = CComponent::Instantiate< TComponent, TArgs... >( *this, args... );
+			return *static_cast< TComponent* >( _componentsMap[cid] );
 		}
 
 		template < typename TComponent >
@@ -39,7 +39,7 @@ namespace gg
 		{
 			const auto cid = GetCompID< TComponent >();
 			assert( _componentsMap.contains( cid ) );
-			return *static_cast<TComponent*>(_componentsMap[cid]);
+			return *static_cast< TComponent* >( _componentsMap[cid] );
 		}
 
 		template < typename TComponent >

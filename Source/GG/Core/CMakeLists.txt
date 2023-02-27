@@ -10,6 +10,11 @@ set (SOURCE
     ${INCDIR}/Objects/Transform.h
     ${SRCDIR}/Objects/Transform.cpp
 
+    ${INCDIR}/EntitySystem/Entity.h
+    ${SRCDIR}/EntitySystem/Entity.cpp
+    ${INCDIR}/EntitySystem/Component.h
+    ${SRCDIR}/EntitySystem/Component.cpp
+
     ${INCDIR}/Math/Mat4x4.h
     ${SRCDIR}/Math/Mat4x4.cpp
     ${INCDIR}/Math/Vec3.h

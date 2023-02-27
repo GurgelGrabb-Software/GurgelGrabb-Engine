@@ -1,6 +1,6 @@
-#include "GG/EntitySystem/Base/Component.h"
+#include "GG/Core/EntitySystem/Component.h"
 
-#include "GG/EntitySystem/Base/Entity.h"
+#include "GG/Core/EntitySystem/Entity.h"
 
 using namespace gg;
 

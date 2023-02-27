@@ -1,4 +1,4 @@
-#include "GG/EntitySystem/Base/Entity.h"
+#include "GG/Core/EntitySystem/Entity.h"
 
 gg::CEntity::CEntity()
 	: _componentsMap()
