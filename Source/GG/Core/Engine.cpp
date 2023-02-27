@@ -4,11 +4,13 @@
 
 #include <GG/Rendering/Window.h>
 #include <GG/Core/Threading/ThreadPool.h>
+#include <GG/Core/Messaging/MessageQueue.h>
 #include <iostream>
 
 gg::CEngine::CEngine()
 	: _serviceProvider( new CServiceProvider() ),
-	_threadPool(_serviceProvider->EmplaceRegister<CThreadPool>(4))
+	_threadPool(_serviceProvider->EmplaceRegister<CThreadPool>(4)),
+	_msgQueue(_serviceProvider->EmplaceRegister<CMessageQueue>())
 {
 }
 
@@ -24,7 +26,8 @@ void gg::CEngine::Run()
 	while ( window.IsOpen() )
 	{
 		_threadPool.CallOnCompletes(100);
-		
+		_msgQueue.SendAllEvents();
+
 		window.Clear();
 		window.PollEvents();
 		window.Present();

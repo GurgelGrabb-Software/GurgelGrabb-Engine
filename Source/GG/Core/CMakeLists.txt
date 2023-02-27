@@ -26,6 +26,15 @@ set (SOURCE
     ${INCDIR}/Threading/ThreadObject.h
     ${SRCDIR}/Threading/ThreadObject.cpp
     
+    ${INCDIR}/Messaging/BaseMessage.h
+    ${INCDIR}/Messaging/MessageSubscriberList.h
+    ${INCDIR}/Messaging/MessageQueue.h
+    ${SRCDIR}/Messaging/MessageQueue.cpp
+    ${INCDIR}/Messaging/SubscriptionHandle.h
+    ${SRCDIR}/Messaging/SubscriptionHandle.cpp
+    ${INCDIR}/Messaging/Subscriptions.h
+    ${SRCDIR}/Messaging/Subscriptions.cpp
+    
     ${INCDIR}/Service/ServiceProviderInterface.h
     ${INCDIR}/Service/ServiceInterface.h
     ${SRCDIR}/Service/ServiceProvider.h

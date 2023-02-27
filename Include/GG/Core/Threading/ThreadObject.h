@@ -14,8 +14,8 @@ namespace gg
         class CThreadObject
         {
         public:
-            CThreadObject& operator=( CThreadObject&& ) = default;
-            CThreadObject( CThreadObject&& ) = default;
+            CThreadObject& operator=( CThreadObject&& ) = delete;
+            CThreadObject( CThreadObject&& ) = delete;
 
             CThreadObject( const CThreadObject& ) = delete;
             CThreadObject& operator=( const CThreadObject& ) = delete;
