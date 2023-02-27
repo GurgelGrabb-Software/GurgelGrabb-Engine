@@ -4,6 +4,12 @@ set (SOURCE
     ${INCDIR}/Engine.h
     ${SRCDIR}/Engine.cpp
 
+    ${INCDIR}/Objects/Object.h
+    ${SRCDIR}/Objects/Object.cpp
+    ${INCDIR}/Objects/Transform.h
+    ${SRCDIR}/Objects/Transform.cpp
+    ${INCDIR}/Objects/Component.h
+
     ${INCDIR}/Math/Mat4x4.h
     ${SRCDIR}/Math/Mat4x4.cpp
     ${INCDIR}/Math/Vec3.h
