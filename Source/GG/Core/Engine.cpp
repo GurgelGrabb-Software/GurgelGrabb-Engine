@@ -3,10 +3,12 @@
 #include "Service/ServiceProvider.h"
 
 #include <GG/Rendering/Window.h>
+#include <GG/Core/Threading/ThreadPool.h>
 #include <iostream>
 
 gg::CEngine::CEngine()
-	: _serviceProvider( new CServiceProvider() )
+	: _serviceProvider( new CServiceProvider() ),
+	_threadPool(_serviceProvider->EmplaceRegister<CThreadPool>(4))
 {
 }
 
@@ -21,6 +23,8 @@ void gg::CEngine::Run()
 	window.Create( 800u, 800u, "Hello :D" );
 	while ( window.IsOpen() )
 	{
+		_threadPool.CallOnCompletes(100);
+		
 		window.Clear();
 		window.PollEvents();
 		window.Present();

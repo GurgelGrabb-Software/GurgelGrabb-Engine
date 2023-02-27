@@ -12,9 +12,11 @@
 #include <thread>
 #include <vector>
 
+#include "GG/Core/Service/ServiceProviderInterface.h"
+
 namespace gg
 {
-    class CThreadPool
+    class CThreadPool : public IService
     {
     public:
         enum class EPriority

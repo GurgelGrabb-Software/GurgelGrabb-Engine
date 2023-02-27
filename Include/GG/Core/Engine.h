@@ -15,5 +15,8 @@ namespace gg
     
     private:
         IServiceProvider* _serviceProvider;
+
+        // Service refs
+        class CThreadPool& _threadPool;
     };
 }
