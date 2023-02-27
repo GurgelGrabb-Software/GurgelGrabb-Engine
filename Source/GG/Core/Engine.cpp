@@ -7,6 +7,8 @@
 #include <GG/Core/Messaging/MessageQueue.h>
 #include <iostream>
 
+#include <GG/Core/Playground.h>
+
 gg::CEngine::CEngine()
 	: _serviceProvider( new CServiceProvider() ),
 	_threadPool(_serviceProvider->EmplaceRegister<CThreadPool>(4)),
@@ -23,13 +25,21 @@ void gg::CEngine::Run()
 {
 	CWindow window;
 	window.Create( 800u, 800u, "Hello :D" );
+
+	CPlayground pg;
+	
 	while ( window.IsOpen() )
 	{
 		_threadPool.CallOnCompletes(100);
 		_msgQueue.SendAllEvents();
 
-		window.Clear();
 		window.PollEvents();
+		pg.Update();
+
+		window.Clear();
+
+		pg.Draw(window);
+
 		window.Present();
 	}
 }

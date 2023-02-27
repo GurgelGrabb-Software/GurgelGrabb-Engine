@@ -4,6 +4,9 @@ set (SOURCE
     ${INCDIR}/Engine.h
     ${SRCDIR}/Engine.cpp
 
+    ${INCDIR}/Playground.h
+    ${SRCDIR}/Playground.cpp
+
     ${INCDIR}/Objects/Transform.h
     ${SRCDIR}/Objects/Transform.cpp
 
