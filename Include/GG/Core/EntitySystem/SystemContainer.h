@@ -1,8 +1,8 @@
 #pragma once
 #include "GG/Core/EntitySystem/System.h"
 
+#include <GG/Common/Container/List.h>
 #include <map>
-#include <vector>
 
 namespace gg
 {
@@ -21,7 +21,7 @@ namespace gg
 		void Tick( ESystemTickGroup group, IServiceProvider& provider );
 
 	private:
-		std::vector< CSystem* > _addedSystems;
-		std::map< ESystemTickGroup, std::vector< CSystem* > > _systemsMap;
+		TList< CSystem* > _addedSystems;
+		std::map< ESystemTickGroup, TList< CSystem* > > _systemsMap;
 	};
 } // namespace gg

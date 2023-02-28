@@ -2,8 +2,8 @@
 
 void gg::CSystemContainer::AddSystem( CSystem& addSystem )
 {
-	_addedSystems.push_back( &addSystem );
-	_systemsMap[addSystem.GetTickGroup()].push_back( &addSystem );
+	_addedSystems.Add( &addSystem );
+	_systemsMap[addSystem.GetTickGroup()].Add( &addSystem );
 }
 
 void gg::CSystemContainer::Tick( ESystemTickGroup group, IServiceProvider& provider )
@@ -12,7 +12,7 @@ void gg::CSystemContainer::Tick( ESystemTickGroup group, IServiceProvider& provi
 	{
 		sysPtr->Start( provider );
 	}
-	_addedSystems.clear();
+	_addedSystems.Clear();
 
 	for ( auto& systemInGroup : _systemsMap[group] )
 	{
