@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.8)
 
-set (SOURCE
-    ${INCDIR}/Container/List.h
-    ${INCDIR}/Helpers/MemUtil.h
-)
+file(GLOB_RECURSE SRC TRUE ${SRCDIR}/ "*.cpp" "*.h")
+file(GLOB_RECURSE API TRUE ${INCDIR}/ "*.h")
+
+set(SOURCE 
+    ${SRC}
+    ${API} )
 
 add_library( 
     ${PROJECT} INTERFACE

@@ -1,55 +1,11 @@
 cmake_minimum_required(VERSION 3.8)
 
-set (SOURCE
-    ${INCDIR}/Engine.h
-    ${SRCDIR}/Engine.cpp
+file(GLOB_RECURSE SRC TRUE ${SRCDIR}/ "*.cpp" "*.h")
+file(GLOB_RECURSE API TRUE ${INCDIR}/ "*.h")
 
-    ${INCDIR}/Playground.h
-    ${SRCDIR}/Playground.cpp
-
-    ${INCDIR}/Objects/Transform.h
-    ${SRCDIR}/Objects/Transform.cpp
-
-    ${INCDIR}/EntitySystem/Entity.h
-    ${SRCDIR}/EntitySystem/Entity.cpp
-    ${INCDIR}/EntitySystem/Component.h
-    ${SRCDIR}/EntitySystem/Component.cpp
-    ${INCDIR}/EntitySystem/System.h
-    ${INCDIR}/EntitySystem/SystemContainer.h
-    ${SRCDIR}/EntitySystem/SystemContainer.cpp
-
-    ${INCDIR}/Math/Mat4x4.h
-    ${SRCDIR}/Math/Mat4x4.cpp
-    ${INCDIR}/Math/Vec3.h
-    ${SRCDIR}/Math/Vec3.cpp
-    
-    ${INCDIR}/Utility/Logging.h
-    ${SRCDIR}/Utility/Logging.cpp
-    ${INCDIR}/Utility/Timer.h
-    ${SRCDIR}/Utility/Timer.cpp
-    ${INCDIR}/Utility/StringID.h
-    ${SRCDIR}/Utility/StringID.cpp
-    
-    ${INCDIR}/Threading/WorkFunction.h
-    ${INCDIR}/Threading/ThreadPool.h
-    ${SRCDIR}/Threading/ThreadPool.cpp
-    ${INCDIR}/Threading/ThreadObject.h
-    ${SRCDIR}/Threading/ThreadObject.cpp
-    
-    ${INCDIR}/Messaging/BaseMessage.h
-    ${INCDIR}/Messaging/MessageSubscriberList.h
-    ${INCDIR}/Messaging/MessageQueue.h
-    ${SRCDIR}/Messaging/MessageQueue.cpp
-    ${INCDIR}/Messaging/SubscriptionHandle.h
-    ${SRCDIR}/Messaging/SubscriptionHandle.cpp
-    ${INCDIR}/Messaging/Subscriptions.h
-    ${SRCDIR}/Messaging/Subscriptions.cpp
-    
-    ${INCDIR}/Service/ServiceProviderInterface.h
-    ${INCDIR}/Service/ServiceInterface.h
-    ${SRCDIR}/Service/ServiceProvider.h
-    ${SRCDIR}/Service/ServiceProvider.cpp
-)
+set(SOURCE 
+    ${SRC}
+    ${API} )
 
 add_library( 
     ${PROJECT} STATIC 

@@ -1,36 +1,11 @@
 cmake_minimum_required(VERSION 3.8)
 
-set (SOURCE
-   ${INCDIR}/GLInclude.h
-   ${SRCDIR}/GLSetup.cpp
+file(GLOB_RECURSE SRC TRUE ${SRCDIR}/ "*.cpp" "*.h")
+file(GLOB_RECURSE API TRUE ${INCDIR}/ "*.h")
 
-   ${INCDIR}/RenderTypes.h
-   ${SRCDIR}/RenderTypes.cpp
-
-   ${INCDIR}/ShaderParser.h
-   ${SRCDIR}/ShaderParser.cpp
-
-   ${INCDIR}/Shader.h
-   ${SRCDIR}/Shader.cpp
-
-   ${INCDIR}/ShaderProgram.h
-   ${SRCDIR}/ShaderProgram.cpp
-
-   ${INCDIR}/Window.h
-   ${SRCDIR}/Window.cpp
-   
-   ${INCDIR}/VertexBuffer.h
-   ${SRCDIR}/VertexBuffer.cpp
-
-   ${INCDIR}/GraphicsUtilities.h
-   ${SRCDIR}/GraphicsUtilities.cpp
-
-   ${INCDIR}/Image.h
-   ${SRCDIR}/Image.cpp
-
-   ${INCDIR}/Texture.h
-   ${SRCDIR}/Texture.cpp
-)
+set(SOURCE 
+    ${SRC}
+    ${API} )
 
 add_library( 
     ${PROJECT} STATIC 

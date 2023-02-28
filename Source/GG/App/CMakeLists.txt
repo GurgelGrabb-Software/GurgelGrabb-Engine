@@ -1,9 +1,11 @@
 cmake_minimum_required( VERSION 3.8 )
 
+file(GLOB_RECURSE SRC TRUE ${SRCDIR}/ "*.cpp" "*.h")
+file(GLOB_RECURSE API TRUE ${INCDIR}/ "*.h")
 
-set (SOURCE
-    ${SRCDIR}/Main.cpp
-    )
+set(SOURCE 
+    ${SRC}
+    ${API} )
 
 add_executable( 
     ${PROJECT}
