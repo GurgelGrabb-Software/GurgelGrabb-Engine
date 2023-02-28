@@ -24,8 +24,6 @@ void gg::CEngine::Run()
 	CWindow window;
 	window.Create( 800u, 800u, "Hello :D" );
 
-	_systemContainer.EmplaceSystem< CTestSystem >();
-
 	CPlayground pg;
 
 	while ( window.IsOpen() )
