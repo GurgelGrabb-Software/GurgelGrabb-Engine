@@ -61,7 +61,8 @@ namespace gg
 		{
 			if ( _elems )
 			{
-				delete[] _elems;
+				Clear();
+				delete _elems;
 			}
 		}
 
@@ -77,11 +78,9 @@ namespace gg
 		}
 
 	public: // MUTATORS
-
-		template<typename ... TArgs>
-		T& Emplace( TArgs&& ... args )
+		template < typename... TArgs >
+		T& Emplace( TArgs&&... args )
 		{
-			
 		}
 
 		T& Add( const T& cpy )
@@ -123,6 +122,16 @@ namespace gg
 
 			_reserved = s;
 			_elems = newBuf;
+		}
+
+		void Clear()
+		{
+			for ( TSize i = 0; i < _size; ++i )
+			{
+				_elems[i].~T();
+				ZeroMem( &_elems[i], sizeof( T ) );
+			}
+			_size = 0;
 		}
 
 	public: // ACCESSORS
