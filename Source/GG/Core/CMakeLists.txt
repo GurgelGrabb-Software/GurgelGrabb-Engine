@@ -14,6 +14,9 @@ set (SOURCE
     ${SRCDIR}/EntitySystem/Entity.cpp
     ${INCDIR}/EntitySystem/Component.h
     ${SRCDIR}/EntitySystem/Component.cpp
+    ${INCDIR}/EntitySystem/System.h
+    ${INCDIR}/EntitySystem/SystemContainer.h
+    ${SRCDIR}/EntitySystem/SystemContainer.cpp
 
     ${INCDIR}/Math/Mat4x4.h
     ${SRCDIR}/Math/Mat4x4.cpp
