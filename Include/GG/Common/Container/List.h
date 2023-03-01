@@ -95,6 +95,21 @@ namespace gg
 			return _elems[_size - 1];
 		}
 
+		T& Back()
+		{
+			return _elems[_size - 1];
+		}
+
+		const T& Back() const
+		{
+			return _elems[_size - 1];
+		}
+
+		const TSize BackIndex() const
+		{
+			return _size - 1;
+		}
+
 		void PopBack( T* set = nullptr )
 		{
 			if ( set != nullptr )
@@ -148,6 +163,19 @@ namespace gg
 		TSize Reserved() const
 		{
 			return _reserved;
+		}
+
+		bool Contains(const T& e) const
+		{
+			for(TSize i = 0; i < _size; ++i)
+			{
+				if(_elems[i] == e)
+				{
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 	public: // ITERATORS
