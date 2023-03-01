@@ -1,4 +1,4 @@
-// GGTL (2023) - TList
+// GGTL (2023) - TChunkedList
 // Sparse list that allocates in chunks when growing, ensuring all elements remain in place in memory
 
 #pragma once
