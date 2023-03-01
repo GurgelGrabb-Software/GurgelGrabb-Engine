@@ -77,7 +77,6 @@ namespace gg
 			else
 			{
 				_free.PopBack( &i );
-				KeepMemDestroy< T >( _elems[i] ); // Invokes the destructor but keeps the memory
 			}
 
 			AllocAt( &_elems[i], std::forward( args... ) );
@@ -108,6 +107,7 @@ namespace gg
 
 		void Remove( TSize i ) 
         {
+			_elems[i].~T();
             _free.Add(i);
         }
 
