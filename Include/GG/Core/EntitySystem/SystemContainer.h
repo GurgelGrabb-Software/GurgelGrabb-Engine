@@ -9,10 +9,14 @@ namespace gg
 	class CSystemContainer
 	{
 	public:
+
+		~CSystemContainer();
+
 		template < typename TSystem, typename... TArgs >
 		void EmplaceSystem( TArgs&&... args )
 		{
 			CSystem* sysPtr = new TSystem( args... );
+			_ownedSystems.Add(sysPtr);
 			AddSystem( *sysPtr );
 		}
 
@@ -21,6 +25,7 @@ namespace gg
 		void Tick( ESystemTickGroup group, IServiceProvider& provider );
 
 	private:
+		TList< CSystem* > _ownedSystems;
 		TList< CSystem* > _addedSystems;
 		std::map< ESystemTickGroup, TList< CSystem* > > _systemsMap;
 	};

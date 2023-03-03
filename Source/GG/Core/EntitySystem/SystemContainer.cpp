@@ -1,5 +1,13 @@
 #include "GG/Core/EntitySystem/SystemContainer.h"
 
+gg::CSystemContainer::~CSystemContainer()
+{
+	for (auto& system : _ownedSystems)
+	{
+		delete system;
+	}
+}
+
 void gg::CSystemContainer::AddSystem( CSystem& addSystem )
 {
 	_addedSystems.Add( &addSystem );
