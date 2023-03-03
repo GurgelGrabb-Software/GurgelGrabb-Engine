@@ -2,7 +2,7 @@
 
 gg::CSystemContainer::~CSystemContainer()
 {
-	for (auto& system : _ownedSystems)
+	for ( auto& system : _ownedSystems )
 	{
 		delete system;
 	}

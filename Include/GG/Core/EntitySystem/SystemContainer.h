@@ -2,21 +2,20 @@
 #include "GG/Core/EntitySystem/System.h"
 
 #include <GG/Common/Container/List.h>
-#include <map>
+#include <unordered_map>
 
 namespace gg
 {
 	class CSystemContainer
 	{
 	public:
-
 		~CSystemContainer();
 
 		template < typename TSystem, typename... TArgs >
 		void EmplaceSystem( TArgs&&... args )
 		{
 			CSystem* sysPtr = new TSystem( args... );
-			_ownedSystems.Add(sysPtr);
+			_ownedSystems.Add( sysPtr );
 			AddSystem( *sysPtr );
 		}
 
@@ -27,6 +26,6 @@ namespace gg
 	private:
 		TList< CSystem* > _ownedSystems;
 		TList< CSystem* > _addedSystems;
-		std::map< ESystemTickGroup, TList< CSystem* > > _systemsMap;
+		std::unordered_map< ESystemTickGroup, TList< CSystem* > > _systemsMap;
 	};
 } // namespace gg
