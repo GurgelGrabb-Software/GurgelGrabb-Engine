@@ -6,25 +6,25 @@
 
 namespace gg
 {
-    class CWindow : public IRenderTarget
-    {
-    public:
-        bool IsOpen() const;
+	class CWindow : public IRenderTarget
+	{
+	public:
+		CWindow( unsigned w, unsigned h, const char* t );
 
-        void Create( unsigned w, unsigned h, const char* t );
-        void Destroy();
-        void Clear();
-        void PollEvents();
-        void Present();
-        glm::i32vec2 GetSize() const;
+		bool IsOpen() const;
 
-        void SetViewport(int x, int y, int w, int h);
+		void Destroy();
+		void Clear();
+		void PollEvents();
+		void Present();
+		glm::i32vec2 GetSize() const;
 
-        virtual void Draw(const CVertexBuffer& vertexBuffer, const CShaderProgram& shaderProgram) override;
+		void SetViewport( int x, int y, int w, int h );
 
-    private:
-        void* _backendWinPtr;
-        void* _backendRendererPtr;
-        bool  _open = true;
-    };
-}
+		virtual void Draw( const CVertexBuffer& vertexBuffer, const CShaderProgram& shaderProgram ) override;
+
+	private:
+		void Create( unsigned w, unsigned h, const char* t );
+		void* _backendWinPtr;
+	};
+} // namespace gg
