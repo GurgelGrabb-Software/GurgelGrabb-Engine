@@ -21,7 +21,7 @@ namespace gg
 
 		void SetViewport( int x, int y, int w, int h );
 
-		virtual void Draw( const CVertexBuffer& vertexBuffer, const CShaderProgram& shaderProgram ) override;
+		virtual void Draw( const CVertexBuffer& vertexBuffer ) override;
 
 	private:
 		void Create( unsigned w, unsigned h, const char* t );

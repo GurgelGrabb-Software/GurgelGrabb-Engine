@@ -1,6 +1,13 @@
 #pragma once
 #include <string>
 
+#define DECLARE_COMPONENT( type ) virtual const std::string GetName() const override;
+#define DEFINE_COMPONENT( type )                                                                                                                                                                       \
+	const std::string gg::type::GetName() const                                                                                                                                                        \
+	{                                                                                                                                                                                                  \
+		return #type;                                                                                                                                                                                  \
+	}
+
 namespace gg
 {
 	class CEntity;

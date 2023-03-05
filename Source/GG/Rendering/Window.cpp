@@ -85,9 +85,8 @@ void gg::CWindow::SetViewport( int x, int y, int w, int h )
 	glViewport( x, y, w, h );
 }
 
-void gg::CWindow::Draw( const gg::CVertexBuffer& vertexBuffer, const CShaderProgram& program )
+void gg::CWindow::Draw( const gg::CVertexBuffer& vertexBuffer )
 {
-	program.Bind();
 	vertexBuffer.Bind();
 	glDrawArrays( ConvertToGLType( vertexBuffer.GetPrimitiveType() ), 0, vertexBuffer.GetVertexCount() );
 }
