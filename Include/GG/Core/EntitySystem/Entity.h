@@ -1,5 +1,6 @@
 #pragma once
 #include "GG/Core/EntitySystem/Component.h"
+#include "GG/Core/EntitySystem/ComponentNotifier.h"
 #include "GG/Core/Objects/Transform.h"
 
 #include <cassert>
@@ -11,7 +12,7 @@ namespace gg
 {
 	class CComponent;
 
-	class CEntity
+	class CEntity : public CComponentNotifier
 	{
 	public:
 		static CEntity* Instantiate();
@@ -22,7 +23,9 @@ namespace gg
 			const auto cid = GetCompID< TComponent >();
 			assert( !_componentsMap.contains( cid ) );
 			_componentsMap[cid] = &c;
-			return *_componentsMap[cid];
+			auto& comp = *_componentsMap[cid];
+			NotifyAdded( comp );
+			return comp;
 		}
 
 		template < typename TComponent, typename... TArgs >
@@ -32,7 +35,9 @@ namespace gg
 			assert( !_componentsMap.contains( cid ) );
 
 			_componentsMap[cid] = CComponent::Instantiate< TComponent, TArgs... >( *this, args... );
-			return *static_cast< TComponent* >( _componentsMap[cid] );
+			auto& comp = *static_cast< TComponent* >( _componentsMap[cid] );
+			NotifyAdded( comp );
+			return comp;
 		}
 
 		template < typename TComponent >
@@ -61,6 +66,7 @@ namespace gg
 
 		CTransform& GetTransform();
 		const CTransform& GetTransform() const;
+
 	private:
 		CEntity();
 
@@ -74,6 +80,6 @@ namespace gg
 		}
 
 		CTransform _transform;
-		std::map< CompTypeID, CComponent* > _componentsMap;
+		std::unordered_map< CompTypeID, CComponent* > _componentsMap;
 	};
 } // namespace gg

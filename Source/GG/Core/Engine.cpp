@@ -5,6 +5,7 @@
 #include <GG/Core/Messaging/MessageQueue.h>
 #include <GG/Core/Playground.h>
 #include <GG/Core/Threading/ThreadPool.h>
+#include <GG/Rendering/RenderManager.h>
 #include <GG/Rendering/Window.h>
 
 gg::CEngine::CEngine()
@@ -21,10 +22,9 @@ gg::CEngine::~CEngine()
 
 void gg::CEngine::Run()
 {
-	CWindow window;
-	window.Create( 800u, 800u, "Hello :D" );
+	CWindow window( 800u, 800u, "Hello :D" );
 
-	CPlayground pg;
+	CRenderManager rm( window, _threadPool );
 
 	while ( window.IsOpen() )
 	{
@@ -32,13 +32,12 @@ void gg::CEngine::Run()
 		_msgQueue.SendAllEvents();
 
 		window.PollEvents();
-		pg.Update();
 
 		_systemContainer.Tick( ESystemTickGroup::PreRender, *_serviceProvider );
 
 		window.Clear();
 
-		pg.Draw( window );
+		rm.Draw();
 
 		window.Present();
 
