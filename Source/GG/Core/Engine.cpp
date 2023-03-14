@@ -16,6 +16,7 @@ gg::CEngine::CEngine()
 	, _window( 800u, 800u, "Hello :D" )
 	, _renderManager( _window, _threadPool )
 {
+	_window.AddListener( this );
 }
 
 gg::CEngine::~CEngine()
@@ -69,4 +70,11 @@ CEntity& gg::CEngine::AddEntity()
 	auto entity = _entities.Add( CEntity::Instantiate() );
 	entity->AddListener( &_renderManager );
 	return *entity;
+}
+
+#include <iostream>
+void gg::CEngine::OnKeyEvent( EInputCode key, bool pressed )
+{
+	std::cout << ToString( (EInputCode)key ) << std::endl;
+	if ( key == EInputCode::KEY_D ) _window.RemoveListener( this );
 }

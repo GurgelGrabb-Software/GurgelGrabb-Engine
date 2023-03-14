@@ -1,12 +1,22 @@
 #pragma once
 
+#include "GG/Common/Helpers/Notifier.h"
+#include "GG/Rendering/InputTypes.h"
 #include "GG/Rendering/RenderTarget.h"
 
 #include <glm/vec2.hpp>
 
 namespace gg
 {
-	class CWindow : public IRenderTarget
+	class CInputListener : public CListener
+	{
+	public:
+		virtual void OnKeyEvent( EInputCode key, bool pressed ) {};
+	};
+
+	class CWindow
+		: public IRenderTarget
+		, public TNotifier< CInputListener >
 	{
 	public:
 		CWindow( unsigned w, unsigned h, const char* t );
@@ -25,6 +35,8 @@ namespace gg
 
 	private:
 		void Create( unsigned w, unsigned h, const char* t );
+		void SetupInputCallbacks();
+
 		void* _backendWinPtr;
 	};
 } // namespace gg

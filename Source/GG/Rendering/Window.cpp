@@ -4,6 +4,7 @@
 
 #define WIN_PTR (GLFWwindow*)_backendWinPtr
 
+#include "GG/Rendering/InputTypes.h"
 #include "GG/Rendering/RenderTypes.h"
 #include "GG/Rendering/Shader.h"
 #include "GG/Rendering/ShaderProgram.h"
@@ -40,6 +41,8 @@ void gg::CWindow::Create( unsigned w, unsigned h, const char* t )
 
 	glEnable( GL_BLEND );
 	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+
+	SetupInputCallbacks();
 }
 
 void gg::CWindow::Destroy()
@@ -89,4 +92,18 @@ void gg::CWindow::Draw( const gg::CVertexBuffer& vertexBuffer )
 {
 	vertexBuffer.Bind();
 	glDrawArrays( ConvertToGLType( vertexBuffer.GetPrimitiveType() ), 0, vertexBuffer.GetVertexCount() );
+}
+
+#include <iostream>
+
+void gg::CWindow::SetupInputCallbacks()
+{
+	glfwSetWindowUserPointer( WIN_PTR, this );
+
+	glfwSetKeyCallback( WIN_PTR,
+						[]( GLFWwindow* window, int key, int scancode, int action, int mods )
+						{
+							auto _this = (CWindow*)glfwGetWindowUserPointer( window );
+							_this->NotifyListeners( [key, action]( CInputListener& listener ) { listener.OnKeyEvent( (EInputCode)key, action == GLFW_PRESS ); } );
+						} );
 }
