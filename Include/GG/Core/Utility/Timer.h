@@ -2,18 +2,17 @@
 
 namespace gg
 {
-    class CTimer
-    {
-    public:
-        CTimer();
+	class CTimer
+	{
+	public:
+		CTimer();
 
-        float Reset();
+		float Restart();
 
-        float GetTotalTime() const;
+		float GetTotalTime() const;
 
-    private:
-
-        unsigned long _previous;
-        unsigned long _start;
-    };
-}
+	private:
+		unsigned long _previous;
+		unsigned long _start;
+	};
+} // namespace gg
