@@ -39,7 +39,7 @@ CPlayground::CPlayground()
 
 void CPlayground::Update()
 {
-	float dt = timer.Reset();
+	float dt = timer.Restart();
 
 	entity->GetTransform().SetScale( { 0.75f + 0.25f * std::cosf( timer.GetTotalTime() ), 0.75f + 0.25f * std::sinf( timer.GetTotalTime() ), 1 } );
 	entity->GetTransform().SetPosition( { 0.5f * std::cosf( timer.GetTotalTime() ), 0.5f * std::sinf( timer.GetTotalTime() ), 0 } );

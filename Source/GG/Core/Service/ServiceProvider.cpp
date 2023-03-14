@@ -7,15 +7,26 @@ gg::CServiceProvider::CServiceProvider()
 
 gg::CServiceProvider::~CServiceProvider()
 {
-	while ( !_serviceMap.empty() )
+	while ( !_deletionStack.empty() )
 	{
-        auto it = _serviceMap.end();
-        it--;
-		Unregister( it->first );
+		auto type = _deletionStack.top();
+		auto it = _serviceMap.find( type );
+		if ( it != _serviceMap.end() )
+		{
+			auto owned = _owned.find( it->second );
+			bool release = false;
+			if ( owned != _owned.end() )
+			{
+				release = true;
+				_owned.erase( owned );
+			}
+			Unregister( it->first, release );
+		}
+		_deletionStack.pop();
 	}
 }
 
-void gg::CServiceProvider::Register( IService& service, ServiceTypeID serviceType )
+void gg::CServiceProvider::Register( IService& service, ServiceTypeID serviceType, bool autoRelease )
 {
 	if ( HasService( serviceType ) )
 	{
@@ -24,6 +35,11 @@ void gg::CServiceProvider::Register( IService& service, ServiceTypeID serviceTyp
 	}
 
 	_serviceMap[serviceType] = &service;
+	_deletionStack.push( serviceType );
+	if ( autoRelease )
+	{
+		_owned.insert( &service );
+	}
 }
 
 void gg::CServiceProvider::Unregister( ServiceTypeID serviceType, bool release )

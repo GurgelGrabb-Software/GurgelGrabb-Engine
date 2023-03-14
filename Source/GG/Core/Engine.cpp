@@ -7,16 +7,20 @@
 #include <GG/Core/Messaging/MessageQueue.h>
 #include <GG/Core/Playground.h>
 #include <GG/Core/Threading/ThreadPool.h>
+#include <GG/Core/Utility/TimeManager.h>
 #include <GG/Core/Utility/Timer.h>
 
 gg::CEngine::CEngine()
 	: _serviceProvider( new CServiceProvider() )
-	, _threadPool( _serviceProvider->EmplaceRegister< CThreadPool >( 4 ) )
+	, _threadPool( _serviceProvider->EmplaceRegister< CThreadPool >( 8 ) )
 	, _msgQueue( _serviceProvider->EmplaceRegister< CMessageQueue >() )
+	, _timeManager( _serviceProvider->EmplaceRegister< CTimeManager >() )
 	, _window( 800u, 800u, "Hello :D" )
 	, _renderManager( _window, _threadPool )
 {
 	_window.AddListener( this );
+	_systemContainer.AddSystem( _timeManager );
+	_serviceProvider->Register( *this );
 }
 
 gg::CEngine::~CEngine()
@@ -24,14 +28,11 @@ gg::CEngine::~CEngine()
 	delete _serviceProvider;
 }
 
-void gg::CEngine::Run()
+void gg::CEngine::Run( CSystem* const game )
 {
-	CTimer timer;
-
-	for ( int i = 0; i < 3; ++i )
+	if ( game )
 	{
-		auto& entity = AddEntity();
-		entity.EmplaceComponent< CDrawableComponent >();
+		_systemContainer.AddSystem( *game );
 	}
 
 	while ( _window.IsOpen() )
@@ -42,13 +43,6 @@ void gg::CEngine::Run()
 		_window.PollEvents();
 
 		_systemContainer.Tick( ESystemTickGroup::PreRender, *_serviceProvider );
-
-		for ( int i = 0; i < _entities.Size(); ++i )
-		{
-			auto& entity = _entities[i];
-			auto offset = i * 6.28f / _entities.Size();
-			entity->GetTransform().SetPosition( { 0.5f * sinf( timer.GetTotalTime() + offset ), 0.5f * cosf( timer.GetTotalTime() + offset ), 0.f } );
-		}
 
 		_window.Clear();
 
@@ -72,9 +66,4 @@ CEntity& gg::CEngine::AddEntity()
 	return *entity;
 }
 
-#include <iostream>
-void gg::CEngine::OnKeyEvent( EInputCode key, bool pressed )
-{
-	std::cout << ToString( (EInputCode)key ) << std::endl;
-	if ( key == EInputCode::KEY_D ) _window.RemoveListener( this );
-}
+void gg::CEngine::OnKeyEvent( EInputCode key, bool pressed ) { }

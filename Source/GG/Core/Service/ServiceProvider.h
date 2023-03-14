@@ -2,7 +2,9 @@
 
 #include "GG/Core/Service/ServiceProviderInterface.h"
 
-#include <map>
+#include <stack>
+#include <unordered_map>
+#include <unordered_set>
 
 namespace gg
 {
@@ -12,7 +14,7 @@ namespace gg
 		CServiceProvider();
 		~CServiceProvider();
 
-		void Register( IService& service, ServiceTypeID serviceType ) override;
+		void Register( IService& service, ServiceTypeID serviceType, bool autoRelease ) override;
 		void Unregister( ServiceTypeID serviceType, bool release = true ) override;
 
 		IService* Get( ServiceTypeID serviceType ) override;
@@ -21,6 +23,8 @@ namespace gg
 		bool HasService( ServiceTypeID serviceType ) const override;
 
 	private:
-		std::map< ServiceTypeID, IService* > _serviceMap;
+		std::unordered_map< ServiceTypeID, IService* > _serviceMap;
+		std::stack< ServiceTypeID > _deletionStack;
+		std::unordered_set< IService* > _owned;
 	};
 } // namespace gg

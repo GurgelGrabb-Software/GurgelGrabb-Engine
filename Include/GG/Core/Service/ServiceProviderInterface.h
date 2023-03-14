@@ -33,19 +33,19 @@ namespace gg
 		TService& EmplaceRegister( TArgs&&... args )
 		{
 			TService* made = new TService( args... );
-			Register( *made, typeid( TService ).hash_code() );
+			Register( *made, typeid( TService ).hash_code(), true );
 			return *made;
 		}
 
 		template < typename TService >
 		void Register( TService& service )
 		{
-			Register( service, typeid( TService ).hash_code() );
+			Register( service, typeid( TService ).hash_code(), false );
 		}
 
 	public:
 		virtual ~IServiceProvider() { }
-		virtual void Register( IService& service, ServiceTypeID serviceType ) = 0;
+		virtual void Register( IService& service, ServiceTypeID serviceType, bool autoRelease ) = 0;
 		virtual void Unregister( ServiceTypeID serviceType, bool release = true ) = 0;
 
 		virtual IService* Get( ServiceTypeID serviceType ) = 0;

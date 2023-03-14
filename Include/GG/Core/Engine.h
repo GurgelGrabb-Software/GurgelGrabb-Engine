@@ -10,13 +10,16 @@
 namespace gg
 {
 	class CEntity;
+	class CSystem;
 
-	class CEngine : CInputListener
+	class CEngine
+		: CInputListener
+		, public IService
 	{
 	public:
 		CEngine();
 		~CEngine();
-		void Run();
+		void Run( CSystem* const game );
 
 		IServiceProvider& GetServiceProvider();
 
@@ -36,5 +39,6 @@ namespace gg
 		// Service refs
 		class CThreadPool& _threadPool;
 		class CMessageQueue& _msgQueue;
+		class CTimeManager& _timeManager;
 	};
 } // namespace gg
